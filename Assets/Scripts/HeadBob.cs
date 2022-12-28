@@ -50,7 +50,7 @@ public class HeadBob : MonoBehaviour
         transform.localPosition += Movement;
         FinalRot += new Vector3(-Movement.x, -Movement.y, Movement.x) * RoationMovementAmount;
     }
-    private Vector3 HeadBobMotion()
+    Vector3 HeadBobMotion()
     {
         Vector3 pos = Vector3.zero;
         pos.y += Mathf.Lerp(pos.y, Mathf.Sin(Time.time * Frequency) * Amount * 1.4f, Smooth * Time.deltaTime);
@@ -58,7 +58,7 @@ public class HeadBob : MonoBehaviour
         return pos;
     }
 
-    private void ResetPos()
+    void ResetPos()
     {
         if (transform.localPosition == StartPos) return;
         transform.localPosition = Vector3.Lerp(transform.localPosition, StartPos, 1 * Time.deltaTime);
