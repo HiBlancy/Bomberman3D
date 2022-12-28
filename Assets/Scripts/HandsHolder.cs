@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EvolveGames
+public class HandsHolder : MonoBehaviour
 {
-    public class HandsHolder : MonoBehaviour
-    {
         [Header("HandsHolder")]
         [SerializeField] bool Enabled = true;
         [Space, Header("Main")]
@@ -66,6 +64,4 @@ namespace EvolveGames
             FinalPos = Vector3.Lerp(FinalPos, StartPos, 1 * Time.deltaTime);
             FinalRot = Vector3.Lerp(FinalRot, StartRot, 1 * Time.deltaTime);
         }
-    }
-
 }
