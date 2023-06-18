@@ -27,6 +27,7 @@ public class PauseDisplay : MonoBehaviour
         Time.timeScale = 1f;
         PanelOptions.SetActive(false);
         GamePaused = false;
+        Cursor.visible = false;
     }
 
     public void Pause()
@@ -34,5 +35,6 @@ public class PauseDisplay : MonoBehaviour
         Time.timeScale = 0f;
         PanelOptions.SetActive(true);
         GamePaused = true;
+        Cursor.visible = true;
     }
 }

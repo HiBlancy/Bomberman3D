@@ -25,8 +25,7 @@ public class HandsHolder : MonoBehaviour
     void Awake()
     {
         player = GetComponentInParent<CharacterController>();
-        if (player.transform.GetComponent<PlayerController>() != null) ToggleSpeed = player.transform.GetComponent<PlayerController>().CroughSpeed * 1.5f;
-        else ToggleSpeed = 1.5f;
+  
         AmountValue = Amount;
         StartPos = transform.localPosition;
         StartRot = transform.localRotation.eulerAngles;
