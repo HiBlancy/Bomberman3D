@@ -19,8 +19,8 @@ public class PlayerInstBomb : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Q) & ableToPlaceBomb)
         {
             PlaceBomb();
-            ableToPlaceBomb = false;
-            StartCoroutine(waitToPlaceBombAgain());
+            //ableToPlaceBomb = false;
+            //StartCoroutine(waitToPlaceBombAgain());
         }
     }
 
@@ -28,13 +28,13 @@ public class PlayerInstBomb : MonoBehaviour
     {
         GameObject bomb = PoolManager.Obj.BombPool.GetElement();
 
-        BombBehaviour bombBehaviour = bomb.GetComponent<BombBehaviour>();
+        BombBehaviour bombBehaviour = bomb.GetComponent<BombBehaviour>(); //mirar si sobresale de la pool para que no pete
         bombBehaviour.SetUpBomb(playerPosition.position);
     }
 
-    IEnumerator waitToPlaceBombAgain()
-    {
-        yield return new WaitForSeconds(1);
-        ableToPlaceBomb = true;
-    }
+    //IEnumerator waitToPlaceBombAgain()
+    //{
+    //    yield return new WaitForSeconds(1);
+    //    ableToPlaceBomb = true;
+    //}
 }
