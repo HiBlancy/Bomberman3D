@@ -15,5 +15,6 @@ public class BombBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         PoolManager.Obj.BombPool.ReturnElement(this.gameObject);
+        PlayerInstBomb.Obj.bombsOnScreen--; //When the bomb explodes, you can spawn more
     }
 }

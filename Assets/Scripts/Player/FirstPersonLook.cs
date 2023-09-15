@@ -10,7 +10,6 @@ public class FirstPersonLook : MonoBehaviour
     Vector2 velocity;
     Vector2 frameVelocity;
 
-
     void Reset()
     {
         // Get the character from the FirstPersonMovement in parents.

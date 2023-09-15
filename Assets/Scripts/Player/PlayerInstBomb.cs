@@ -5,22 +5,27 @@ using UnityEngine;
 
 public class PlayerInstBomb : MonoBehaviour
 {
-    bool ableToPlaceBomb;
+    public static PlayerInstBomb Obj { get; private set; }
+
+    int initialBoombs = 2;
+    public int bombsOnScreen = 0;
     //AudioSource audioSource;
     [SerializeField] Transform playerPosition;
 
     void Awake()
     {
-        ableToPlaceBomb = true;
+        if (Obj != null && Obj != this)
+            Destroy(this);
+        else
+            Obj = this;
     }
 
     void FixedUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.Q) & ableToPlaceBomb)
+        if(Input.GetKeyDown(KeyCode.Q) && (bombsOnScreen != initialBoombs))
         {
             PlaceBomb();
-            //ableToPlaceBomb = false;
-            //StartCoroutine(waitToPlaceBombAgain());
+            bombsOnScreen++;
         }
     }
 
@@ -31,10 +36,4 @@ public class PlayerInstBomb : MonoBehaviour
         BombBehaviour bombBehaviour = bomb.GetComponent<BombBehaviour>(); //mirar si sobresale de la pool para que no pete
         bombBehaviour.SetUpBomb(playerPosition.position);
     }
-
-    //IEnumerator waitToPlaceBombAgain()
-    //{
-    //    yield return new WaitForSeconds(1);
-    //    ableToPlaceBomb = true;
-    //}
 }
