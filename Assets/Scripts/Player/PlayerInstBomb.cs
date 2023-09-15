@@ -33,7 +33,7 @@ public class PlayerInstBomb : MonoBehaviour
     {
         GameObject bomb = PoolManager.Obj.BombPool.GetElement();
 
-        BombBehaviour bombBehaviour = bomb.GetComponent<BombBehaviour>(); //mirar si sobresale de la pool para que no pete
+        BombBehaviour bombBehaviour = bomb.GetComponent<BombBehaviour>();
         bombBehaviour.SetUpBomb(playerPosition.position);
     }
 }
