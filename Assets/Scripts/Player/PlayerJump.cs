@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class PlayerJump : MonoBehaviour
 {
     [HideInInspector] public CharacterController characterController;
-    float InstallCroughHeight;
+   // float InstallCroughHeight;
     [SerializeField] float jumpSpeed = 6f;
     [SerializeField] float gravity = 20f;
     [HideInInspector] public Vector3 moveDirection = Vector3.zero;
@@ -15,7 +15,7 @@ public class PlayerJump : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        InstallCroughHeight = characterController.height;
+    //    InstallCroughHeight = characterController.height;
     }
 
     void Update()
