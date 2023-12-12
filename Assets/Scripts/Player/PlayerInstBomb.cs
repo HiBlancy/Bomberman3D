@@ -8,7 +8,7 @@ public class PlayerInstBomb : MonoBehaviour
     public static PlayerInstBomb Obj { get; private set; }
 
     int initialBoombs = 2;
-    public int bombsOnScreen = 0;
+    public int bombsOnScreen;
     //AudioSource audioSource;
     [SerializeField] Transform playerPosition;
 
@@ -24,6 +24,7 @@ public class PlayerInstBomb : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Q) && (bombsOnScreen != initialBoombs))
         {
+            Debug.Log("q");
             PlaceBomb();
             bombsOnScreen++;
         }

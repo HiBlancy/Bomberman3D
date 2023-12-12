@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BombBehaviour : MonoBehaviour
 {
-    public GameObject[] explotion;
+    [SerializeField] GameObject explotion;
 
     public void SetUpBomb(Vector3 startPosition)
     {
@@ -12,23 +12,16 @@ public class BombBehaviour : MonoBehaviour
         gameObject.SetActive(true);
         StartCoroutine(Explotion());
         StartCoroutine(Desactive());
-
-        explotion = new GameObject[3];
-        explotion = GameObject.FindGameObjectsWithTag("Explotion");
     }
-
 
     IEnumerator Explotion()
     {
         yield return new WaitForSeconds(2);
 
         Debug.Log("bom");
+        explotion.SetActive(true);
 
-        foreach(GameObject exp in explotion)
-        {
-            exp.SetActive(true);
-        }
-
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     IEnumerator Desactive()
@@ -36,5 +29,6 @@ public class BombBehaviour : MonoBehaviour
         yield return new WaitForSeconds(5);
         PoolManager.Obj.BombPool.ReturnElement(this.gameObject);
         PlayerInstBomb.Obj.bombsOnScreen--;
+        explotion.SetActive(false);
     }
 }
