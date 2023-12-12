@@ -8,6 +8,7 @@ public class BombBehaviour : MonoBehaviour
 
     public void SetUpBomb(Vector3 startPosition)
     {
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
         this.transform.position = startPosition;
         gameObject.SetActive(true);
         StartCoroutine(Explotion());
