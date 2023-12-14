@@ -29,7 +29,7 @@ public class BombBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         PoolManager.Obj.BombPool.ReturnElement(this.gameObject);
-        PlayerInstBomb.Obj.bombsOnScreen--;
+        BombCount.Obj.bombsOnScreen--;
         explotion.SetActive(false);
     }
 }

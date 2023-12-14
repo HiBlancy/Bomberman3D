@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ladder
   - Explotion
+  - Block
   layers:
   - Default
   - TransparentFX

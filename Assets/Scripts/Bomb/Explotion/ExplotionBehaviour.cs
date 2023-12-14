@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ExplotionBehaviour : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Block"))
         {
+            Debug.Log("si");
             Destroy(collision.gameObject);
         }
     }
