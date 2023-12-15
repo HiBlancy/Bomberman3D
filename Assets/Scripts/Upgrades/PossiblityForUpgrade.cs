@@ -21,8 +21,8 @@ public class PossiblityForUpgrade : MonoBehaviour
         int randomIndex = Random.Range(0, upgradePrefabs.Count);
         GameObject upgradePrefab = upgradePrefabs[randomIndex];
 
-        _ = Instantiate(upgradePrefab, transform.position, Quaternion.identity);
+        //_ = Instantiate(upgradePrefab, transform.position, Quaternion.identity);
 
-        // IUpgrade upgrade = Instantiate(upgradePrefab, transform.position, Quaternion.identity)?.GetComponent<IUpgrade>();
+        IUpgrade upgrade = Instantiate(upgradePrefab, transform.position, Quaternion.identity)?.GetComponent<IUpgrade>();
     }
 }
