@@ -7,7 +7,7 @@ public class BlocksOnScreen : MonoBehaviour
 {
     public static BlocksOnScreen Obj { get; private set; }
 
-    int blocksLeft;
+    public int blocksLeft;
 
     void Awake()
     {

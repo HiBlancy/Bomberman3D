@@ -110,6 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e98d8feb29b419e42bf0c3c2e41eb261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradePrefab: {fileID: 3976289916293946202, guid: 6f4c26e0801c7d14798d4a04312d2719,
-    type: 3}
-  upgradeDropChance: 0.5
+  upgradePrefabs:
+  - {fileID: 8931985276695957437, guid: f420973239d386f4d840ee2227b5e220, type: 3}
+  - {fileID: 8931985276695957437, guid: e04893aefacc82f4e93864103833fa72, type: 3}

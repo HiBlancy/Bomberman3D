@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class PossiblityForUpgrade : MonoBehaviour
 {
-    public GameObject upgradePrefab; // Prefab del upgrade a soltar
-    public float upgradeDropChance = 0.5f; // Probabilidad de soltar un upgrade (0.0 - 1.0)
+    public List<GameObject> upgradePrefabs; // Lista de prefabs para diferentes tipos de upgrades.
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")) //la caja se destruye si entra en contacto el jugador
         {
-            // La caja ha sido rota por el jugador
+            BlocksOnScreen.Obj.BlockDestroyed();
+            GenerateRandomUpgrade();
             Destroy(gameObject);
-
-            // Determinar si se suelta un upgrade
-            if (Random.value < upgradeDropChance)
-            {
-                Instantiate(upgradePrefab, transform.position, Quaternion.identity);
-            }
         }
+    }
+
+    private void GenerateRandomUpgrade()
+    {
+        int randomIndex = Random.Range(0, upgradePrefabs.Count);
+        GameObject upgradePrefab = upgradePrefabs[randomIndex];
+
+        _ = Instantiate(upgradePrefab, transform.position, Quaternion.identity);
+
+        // IUpgrade upgrade = Instantiate(upgradePrefab, transform.position, Quaternion.identity)?.GetComponent<IUpgrade>();
     }
 }
