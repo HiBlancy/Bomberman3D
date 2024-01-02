@@ -26,10 +26,12 @@ public class BombCount : MonoBehaviour
     public void UpgradeMoreBombs()
     {
         initialBoombs++;
+        Debug.Log("bombas mas");
     }
 
     public void BombsOnScreen()
     {
+        //si hay el mismo numero de bombas que no se pueda sacar mas
         bombsOnScreen++;
     }
 }

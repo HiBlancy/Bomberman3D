@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class PlayerInstBomb : MonoBehaviour
 {
-    public static PlayerInstBomb Obj { get; private set; }
-
-    //AudioSource audioSource;
+    public GameObject bombaPrefab;
+    public int radioExplosionActual = 1;
     [SerializeField] Transform playerPosition;
+    public static PlayerInstBomb Obj { get; private set; }
 
     void Awake()
     {
@@ -20,19 +20,26 @@ public class PlayerInstBomb : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.Q) && (BombCount.Obj.bombsOnScreen != BombCount.Obj.initialBoombs))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log("q");
-            PlaceBomb();
+            PlantarBomba();
             BombCount.Obj.BombsOnScreen();
         }
     }
 
-    void PlaceBomb()
+    void PlantarBomba()
     {
         GameObject bomb = PoolManager.Obj.BombPool.GetElement();
 
-        BombBehaviour bombBehaviour = bomb.GetComponent<BombBehaviour>();
-        bombBehaviour.SetUpBomb(playerPosition.position);
+        Bomba bombBehaviour = bomb.GetComponent<Bomba>();
+        bombBehaviour.SummonBomb(playerPosition.position);
+
+        bomb.GetComponent<Bomba>().radioExplosion = radioExplosionActual;
+
+    }
+
+    public void MejorarExplosion()
+    {
+        radioExplosionActual = radioExplosionActual + 10;
     }
 }

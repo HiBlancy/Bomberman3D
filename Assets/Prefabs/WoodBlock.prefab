@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2543637099955510630}
   - component: {fileID: 2543637099955510629}
   - component: {fileID: 2172498056071333854}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WoodBlock
   m_TagString: Block
   m_Icon: {fileID: 0}
@@ -113,3 +113,4 @@ MonoBehaviour:
   upgradePrefabs:
   - {fileID: 8931985276695957437, guid: f420973239d386f4d840ee2227b5e220, type: 3}
   - {fileID: 8931985276695957437, guid: e04893aefacc82f4e93864103833fa72, type: 3}
+  - {fileID: 8931985276695957437, guid: e7e1c2085735b4f48bd9df4f62904d35, type: 3}

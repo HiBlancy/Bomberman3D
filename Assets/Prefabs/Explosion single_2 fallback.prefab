@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8238833792011277121}
   - component: {fileID: 8238833792030666071}
   - component: {fileID: 8238833792030660313}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: particle pillar master
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4921,7 +4921,7 @@ GameObject:
   - component: {fileID: 8238833792011327283}
   - component: {fileID: 8238833792030689831}
   - component: {fileID: 8238833792029508655}
-  m_Layer: 1
+  m_Layer: 8
   m_Name: particle fireball glow slave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9641,7 +9641,7 @@ GameObject:
   - component: {fileID: 8238833792011291369}
   - component: {fileID: 8238833792030719191}
   - component: {fileID: 8238833792029548813}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: particle fireball master
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14382,7 +14382,7 @@ GameObject:
   - component: {fileID: 8238833792011307701}
   - component: {fileID: 8238833792030663075}
   - component: {fileID: 8238833792029450479}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: particle fireball slave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18999,7 +18999,7 @@ GameObject:
   - component: {fileID: 8238833792011320721}
   - component: {fileID: 8238833792030704117}
   - component: {fileID: 8238833792029552561}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: particle pillar slave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23598,7 +23598,7 @@ GameObject:
   - component: {fileID: 8238833792011266561}
   - component: {fileID: 8238833792030710957}
   - component: {fileID: 8238833792029491935}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: particle burn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23628,14 +23628,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8238833792011586179}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 0.2
   simulationSpeed: 0.3
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -28232,7 +28232,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8238833792011222155}
   - component: {fileID: 8238833792030670725}
-  m_Layer: 0
+  - component: {fileID: 7040653091860012745}
+  m_Layer: 8
   m_Name: Explosion single_2 fallback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28266,14 +28267,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8238833792011652125}
   serializedVersion: 8
-  lengthInSec: 10
+  lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -32977,6 +32978,18 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &7040653091860012745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8238833792011652125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f888185b5b4db9141a65002d4b5405c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8238833792011665061
 GameObject:
   m_ObjectHideFlags: 0
@@ -32988,7 +33001,7 @@ GameObject:
   - component: {fileID: 8238833792011305739}
   - component: {fileID: 8238833792030681101}
   - component: {fileID: 8238833792030644727}
-  m_Layer: 1
+  m_Layer: 8
   m_Name: particle glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

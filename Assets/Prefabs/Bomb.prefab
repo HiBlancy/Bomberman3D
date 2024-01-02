@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5952181120894435229}
   - component: {fileID: 5952181120894435226}
-  - component: {fileID: 1450000502962971265}
   - component: {fileID: 5952181120894435227}
   - component: {fileID: 5952181120894435224}
-  m_Layer: 0
+  - component: {fileID: 4415141335091171539}
+  m_Layer: 8
   m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,19 +44,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5952181120894435225}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1450000502962971265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5952181120894435225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58a40f606d752ce46aae381ea6820b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explotion: {fileID: 8669138266861368993}
 --- !u!23 &5952181120894435227
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -112,6 +99,25 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4415141335091171539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5952181120894435225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9fa16bd0a5b9546aeb76c75a3792dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiempoExplosion: 3
+  radioExplosion: 2
+  capasObjetosDestructibles:
+    serializedVersion: 2
+    m_Bits: 448
+  sistemaParticulasExplosion: {fileID: 8238833792011652125, guid: 980b61c3e3cbedd429701bc02921f98a,
+    type: 3}
 --- !u!1 &8669138266861368993
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8718898793950588258}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
