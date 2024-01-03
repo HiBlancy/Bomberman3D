@@ -15,15 +15,24 @@ public class PossiblityForUpgrade : MonoBehaviour
         else
             Obj = this;
     }
-
-    public void BloqueDestruido()
+    void OnCollisionEnter(Collision collision)
     {
-        
-        GenerateRandomUpgrade();
-        BlocksOnScreen.Obj.BlockDestroyed();
-       // Destroy(gameObject);
-        gameObject.SetActive(false);
+        if (collision.collider.CompareTag("Explotion"))
+        {
+            GenerateRandomUpgrade();
+            BlocksOnScreen.Obj.BlockDestroyed();
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
+        }
     }
+    //public void BloqueDestruido()
+    //{
+        
+    //    GenerateRandomUpgrade();
+    //    BlocksOnScreen.Obj.BlockDestroyed();
+    //   // Destroy(gameObject);
+    //    gameObject.SetActive(false);
+    //}
 
     private void GenerateRandomUpgrade()
     {
@@ -33,5 +42,9 @@ public class PossiblityForUpgrade : MonoBehaviour
         _ = Instantiate(upgradePrefab, transform.position, Quaternion.identity);
 
         //IUpgrade upgrade = Instantiate(upgradePrefab, transform.position, Quaternion.identity)?.GetComponent<IUpgrade>();
+    }
+    private void OnDisable()
+    {
+        Destroy(gameObject);
     }
 }

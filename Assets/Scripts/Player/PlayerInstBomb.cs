@@ -35,7 +35,6 @@ public class PlayerInstBomb : MonoBehaviour
         bombBehaviour.SummonBomb(playerPosition.position);
 
         bomb.GetComponent<Bomba>().radioExplosion = radioExplosionActual;
-
     }
 
     public void MejorarExplosion()

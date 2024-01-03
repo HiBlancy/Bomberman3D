@@ -18,7 +18,12 @@ PrefabInstance:
     - target: {fileID: 3976289916293946202, guid: 6f4c26e0801c7d14798d4a04312d2719,
         type: 3}
       propertyPath: m_Name
-      value: Upgrade Variant
+      value: Upgrade Health
+      objectReference: {fileID: 0}
+    - target: {fileID: 3976289916293946202, guid: 6f4c26e0801c7d14798d4a04312d2719,
+        type: 3}
+      propertyPath: m_TagString
+      value: powerup
       objectReference: {fileID: 0}
     - target: {fileID: 3976289916293946202, guid: 6f4c26e0801c7d14798d4a04312d2719,
         type: 3}
@@ -106,4 +111,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f68a4f833ff9ab2469b7d3aa23bedd41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeMaterial: {fileID: 2100000, guid: 637bab93d5d1f5244b64498621251ea4, type: 2}

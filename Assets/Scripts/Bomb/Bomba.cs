@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bomba : MonoBehaviour
 {
     public float tiempoExplosion = 3f;
     public float radioExplosion = 2f;
-    public LayerMask capasObjetosDestructibles;
+    //public LayerMask capasObjetosDestructibles;
     public GameObject sistemaParticulasExplosion;
+
+    private bool exploded = false;
 
     public void SummonBomb(Vector3 startPosition)
     {
@@ -18,40 +21,62 @@ public class Bomba : MonoBehaviour
 
     void Explotar()
     {
-        // Desactivar el objeto visual de la bomba
         PoolManager.Obj.BombPool.ReturnElement(this.gameObject);
         BombCount.Obj.bombsOnScreen--;
 
-        // Activar el sistema de partículas de la explosión
-        GameObject particulasExplosion = Instantiate(sistemaParticulasExplosion, transform.position, Quaternion.identity);
+        CreateExplosions(Vector3.forward);
+        CreateExplosions(Vector3.right);
+        CreateExplosions(Vector3.back);
+        CreateExplosions(Vector3.left);
 
-        // Lógica de detección de colisiones y daño (como se describió en respuestas anteriores)
-        ExplorarEnDireccion(Vector3.forward);
-        ExplorarEnDireccion(Vector3.back);
-        ExplorarEnDireccion(Vector3.left);
-        ExplorarEnDireccion(Vector3.right);
+        exploded = true;
     }
 
-    void ExplorarEnDireccion(Vector3 direccion)
+    void CreateExplosions(Vector3 posicion)
     {
-        for (float i = 1; i <= radioExplosion; i++)
+        List<Vector3> instantiate_list = new List<Vector3>();
+
+        for (float i = 1; i < 3; i++)
         {
-            Vector3 posicion = transform.position + direccion * i;
-
-            Debug.DrawLine(posicion, direccion, Color.red, 5f);
-
-            // Lanzar rayo en la dirección especificada
             RaycastHit hit;
-            if (Physics.Raycast(posicion, direccion, out hit, i, capasObjetosDestructibles))
+            Vector3 direccion = transform.position + posicion * i;
+
+            //Physics.Raycast(transform.position, direccion, out hit, i);
+
+            Debug.DrawLine(transform.position, direccion, Color.green, 5f);
+
+
+            if (Physics.Raycast(transform.position, direccion, out hit, i))
             {
                 if (hit.collider.CompareTag("Block"))
                 {
-                    // Destruir bloque y generar upgrade
-                   // Destroy(hit.collider.gameObject);
-                    PossiblityForUpgrade.Obj.BloqueDestruido();
+                    instantiate_list.Add(transform.position + (i * posicion));
+                    Debug.Log("block");
+                }
+                else if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("powerup") || hit.collider.CompareTag("Bomb"))
+                {
+                    instantiate_list.Add(transform.position + (i * posicion));
+                    Debug.Log("other");
                 }
             }
+            else
+            {      
+                instantiate_list.Add(transform.position + (i * posicion));
+                Debug.Log("noting");
+            }
+        }
+        foreach (Vector3 explosiveZone in instantiate_list)
+        {
+            Instantiate(sistemaParticulasExplosion, explosiveZone, sistemaParticulasExplosion.transform.rotation);
         }
     }
 
-}
+        void OnCollisionEnter(Collision collision)
+        {
+            if (!exploded && collision.collider.CompareTag("Explotion"))
+            {
+                CancelInvoke("Explotar");
+                Explotar();
+            }
+        }
+}  

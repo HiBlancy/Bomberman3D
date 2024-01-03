@@ -28235,7 +28235,7 @@ GameObject:
   - component: {fileID: 7040653091860012745}
   m_Layer: 8
   m_Name: Explosion single_2 fallback
-  m_TagString: Untagged
+  m_TagString: Explotion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31838,9 +31838,9 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 4
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -32017,8 +32017,8 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
-    maxCollisionShapes: 256
+      m_Bits: 448
+    maxCollisionShapes: 5
     quality: 0
     voxelSize: 0.5
     collisionMessages: 0
