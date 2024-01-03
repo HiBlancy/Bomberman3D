@@ -6,44 +6,25 @@ public class PossiblityForUpgrade : MonoBehaviour
 {
     public List<GameObject> upgradePrefabs; // Lista de prefabs para diferentes tipos de upgrades.
 
-    public static PossiblityForUpgrade Obj { get; private set; }
-
-    void Awake()
-    {
-        if (Obj != null && Obj != this)
-            Destroy(this);
-        else
-            Obj = this;
-    }
     void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Explotion"))
         {
+             BlocksOnScreen.Obj.BlockDestroyed();
+        Debug.Log("blocsssss");
+        if (Random.Range(0.0f, 1.0f) > 0.7f)
+        {
             GenerateRandomUpgrade();
-            BlocksOnScreen.Obj.BlockDestroyed();
-            //Destroy(gameObject);
-            gameObject.SetActive(false);
+        }
+        Destroy(gameObject);
         }
     }
-    //public void BloqueDestruido()
-    //{        
-    //    GenerateRandomUpgrade();
-    //    //gameObject.SetActive(false);
-    //    BlocksOnScreen.Obj.BlockDestroyed();
-    //    Destroy(this.gameObject);        
-    //}
 
     private void GenerateRandomUpgrade()
     {
         int randomIndex = Random.Range(0, upgradePrefabs.Count);
         GameObject upgradePrefab = upgradePrefabs[randomIndex];
 
-        _ = Instantiate(upgradePrefab, transform.localPosition, Quaternion.identity);
-
-        //IUpgrade upgrade = Instantiate(upgradePrefab, transform.position, Quaternion.identity)?.GetComponent<IUpgrade>();
+        _ = Instantiate(upgradePrefab, transform.position, Quaternion.identity);
     }
-    //private void OnDisable()
-    //{
-    //    Destroy(gameObject);
-    //}
 }

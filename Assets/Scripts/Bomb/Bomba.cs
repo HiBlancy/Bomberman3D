@@ -54,7 +54,6 @@ public class Bomba : MonoBehaviour
                 if (hit.collider.CompareTag("Block"))
                 {
                     instantiate_list.Add(raycastPosition);
-                  //  PossiblityForUpgrade.Obj.BloqueDestruido();
                     Debug.Log("block");
                 }
                 else if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("powerup") || hit.collider.CompareTag("Bomb"))
