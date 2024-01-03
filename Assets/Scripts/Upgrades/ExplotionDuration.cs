@@ -11,6 +11,6 @@ public class ExplotionDuration : MonoBehaviour
 
     void DisableElement()
     {
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

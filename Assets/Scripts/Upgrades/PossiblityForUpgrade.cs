@@ -26,12 +26,11 @@ public class PossiblityForUpgrade : MonoBehaviour
         }
     }
     //public void BloqueDestruido()
-    //{
-        
+    //{        
     //    GenerateRandomUpgrade();
+    //    //gameObject.SetActive(false);
     //    BlocksOnScreen.Obj.BlockDestroyed();
-    //   // Destroy(gameObject);
-    //    gameObject.SetActive(false);
+    //    Destroy(this.gameObject);        
     //}
 
     private void GenerateRandomUpgrade()
@@ -39,12 +38,12 @@ public class PossiblityForUpgrade : MonoBehaviour
         int randomIndex = Random.Range(0, upgradePrefabs.Count);
         GameObject upgradePrefab = upgradePrefabs[randomIndex];
 
-        _ = Instantiate(upgradePrefab, transform.position, Quaternion.identity);
+        _ = Instantiate(upgradePrefab, transform.localPosition, Quaternion.identity);
 
         //IUpgrade upgrade = Instantiate(upgradePrefab, transform.position, Quaternion.identity)?.GetComponent<IUpgrade>();
     }
-    private void OnDisable()
-    {
-        Destroy(gameObject);
-    }
+    //private void OnDisable()
+    //{
+    //    Destroy(gameObject);
+    //}
 }
