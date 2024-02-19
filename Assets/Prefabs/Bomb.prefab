@@ -15,7 +15,11 @@ GameObject:
   - component: {fileID: 5952181120894435224}
   m_Layer: 0
   m_Name: Bomb
+<<<<<<< Updated upstream
   m_TagString: Untagged
+=======
+  m_TagString: Explotion
+>>>>>>> Stashed changes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,6 +126,7 @@ SphereCollider:
 --- !u!1001 &1907774247695902516
 PrefabInstance:
   m_ObjectHideFlags: 0
+<<<<<<< Updated upstream
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 5952181120894435229}
@@ -196,6 +201,20 @@ PrefabInstance:
 --- !u!4 &1348096176511200501 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 634058421788625857, guid: 6a52d12f2cee4f248b382090ae77c22e,
+=======
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5952181120894435225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9fa16bd0a5b9546aeb76c75a3792dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiempoExplosion: 3
+  radioExplosion: 2
+  sistemaParticulasExplosion: {fileID: 8238833792011652125, guid: 980b61c3e3cbedd429701bc02921f98a,
+>>>>>>> Stashed changes
     type: 3}
   m_PrefabInstance: {fileID: 1907774247695902516}
   m_PrefabAsset: {fileID: 0}

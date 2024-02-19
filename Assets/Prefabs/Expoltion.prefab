@@ -97,3 +97,35 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+<<<<<<< Updated upstream:Assets/Prefabs/Expoltion.prefab
+=======
+--- !u!65 &2543637099955510629
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2543637099955510627}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2172498056071333854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2543637099955510627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e98d8feb29b419e42bf0c3c2e41eb261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradePrefabs:
+  - {fileID: 8931985276695957437, guid: f420973239d386f4d840ee2227b5e220, type: 3}
+  - {fileID: 8931985276695957437, guid: e04893aefacc82f4e93864103833fa72, type: 3}
+  - {fileID: 8931985276695957437, guid: e7e1c2085735b4f48bd9df4f62904d35, type: 3}
+>>>>>>> Stashed changes:Assets/Prefabs/WoodBlock.prefab
