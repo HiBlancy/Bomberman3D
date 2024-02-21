@@ -93,7 +93,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2543637099955510627}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -114,6 +114,3 @@ MonoBehaviour:
   - {fileID: 8931985276695957437, guid: f420973239d386f4d840ee2227b5e220, type: 3}
   - {fileID: 8931985276695957437, guid: e04893aefacc82f4e93864103833fa72, type: 3}
   - {fileID: 8931985276695957437, guid: e7e1c2085735b4f48bd9df4f62904d35, type: 3}
-  capasObjetosDestructibles:
-    serializedVersion: 2
-    m_Bits: 0

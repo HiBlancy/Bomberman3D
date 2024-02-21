@@ -54,12 +54,15 @@ public class Bomba : MonoBehaviour
                 if (hit.collider.CompareTag("Block"))
                 {
                     instantiate_list.Add(raycastPosition);
-                    Debug.Log("block");
+                    //destruir caja
+                    Debug.Log("Raycast impactó en: " + hit.collider.gameObject.name);
+                    hit.collider.gameObject.GetComponent<PossiblityForUpgrade>().enabled = true;
                 }
-                else if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("powerup") || hit.collider.CompareTag("Bomb"))
+                else if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("powerup"))
                 {
                     instantiate_list.Add(raycastPosition);
-                    Debug.Log("other");
+                    Debug.Log("Raycast impactó en: " + hit.collider.gameObject.name);
+                    //quitar vida al jugador
                     continue;
                 }
                 break;
@@ -70,11 +73,11 @@ public class Bomba : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision)
+    {
+        if (!exploded && collision.collider.CompareTag("Bomb"))
         {
-            if (!exploded && collision.collider.CompareTag("Explotion"))
-            {
-                CancelInvoke("Explotar");
-                Explotar();
-            }
+            CancelInvoke("Explotar");
+            Explotar();
         }
-}  
+    }
+}

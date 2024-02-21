@@ -10,13 +10,13 @@ public class PossiblityForUpgrade : MonoBehaviour
     {
         if (collision.collider.CompareTag("Explotion"))
         {
-             BlocksOnScreen.Obj.BlockDestroyed();
-        Debug.Log("blocsssss");
-        if (Random.Range(0.0f, 1.0f) > 0.7f)
-        {
-            GenerateRandomUpgrade();
-        }
-        Destroy(gameObject);
+            BlocksOnScreen.Obj.BlockDestroyed();
+            Debug.Log("blocsssss");
+
+            if (Random.Range(0.0f, 1.0f) > 0.7f)
+                GenerateRandomUpgrade();
+
+            Destroy(gameObject);
         }
     }
 
