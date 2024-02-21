@@ -6,9 +6,9 @@ public class PossiblityForUpgrade : MonoBehaviour
 {
     public List<GameObject> upgradePrefabs; // Lista de prefabs para diferentes tipos de upgrades.
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
-        if (collision.collider.CompareTag("Explotion"))
+        if (collision.CompareTag("Explotion"))
         {
             BlocksOnScreen.Obj.BlockDestroyed();
             Debug.Log("blocsssss");

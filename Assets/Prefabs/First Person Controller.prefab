@@ -457,6 +457,7 @@ GameObject:
   - component: {fileID: 114497868231759342}
   - component: {fileID: 114762042097486276}
   - component: {fileID: 8938827113561997664}
+  - component: {fileID: 6800263257107764038}
   m_Layer: 7
   m_Name: First Person Controller
   m_TagString: Player
@@ -588,6 +589,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverPanel: {fileID: 0}
   playerLives: 0
+--- !u!114 &6800263257107764038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773623360729482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7355e07ecd8355045b9985c5b991de24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &695710598036886167
 GameObject:
   m_ObjectHideFlags: 0

@@ -55,13 +55,13 @@ public class Bomba : MonoBehaviour
                 {
                     instantiate_list.Add(raycastPosition);
                     //destruir caja
-                    Debug.Log("Raycast impact� en: " + hit.collider.gameObject.name);
+                    Debug.Log("Raycast impacto en: " + hit.collider.gameObject.name);
                     hit.collider.gameObject.GetComponent<PossiblityForUpgrade>().enabled = true;
                 }
                 else if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("powerup"))
                 {
                     instantiate_list.Add(raycastPosition);
-                    Debug.Log("Raycast impact� en: " + hit.collider.gameObject.name);
+                    Debug.Log("Raycast impacto en: " + hit.collider.gameObject.name);
                     //quitar vida al jugador
                     continue;
                 }
@@ -76,6 +76,7 @@ public class Bomba : MonoBehaviour
     {
         if (!exploded && collision.collider.CompareTag("Bomb"))
         {
+            Debug.Log("bomba");
             CancelInvoke("Explotar");
             Explotar();
         }
