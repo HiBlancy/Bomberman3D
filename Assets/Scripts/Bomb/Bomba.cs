@@ -36,7 +36,7 @@ public class Bomba : MonoBehaviour
     {
         List<Vector3> instantiate_list = new List<Vector3>();
 
-        for (float i = 1; i < 3; i++)
+        for (float i = 1; i < radioExplosion; i++)
         {
             RaycastHit hit;
             Vector3 raycastPosition = transform.position + direccion * i;

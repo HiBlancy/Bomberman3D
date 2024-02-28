@@ -20,7 +20,7 @@ public class BombCount : MonoBehaviour
 
     void Start()
     {
-        initialBoombs = 2;
+        initialBoombs = 1;
     }
 
     public void UpgradeMoreBombs()

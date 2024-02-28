@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerInstBomb : MonoBehaviour
 {
     public GameObject bombaPrefab;
-    public int radioExplosionActual = 1;
+    //public int radioExplosionActual;
     [SerializeField] Transform playerPosition;
     public static PlayerInstBomb Obj { get; private set; }
 
@@ -20,7 +20,7 @@ public class PlayerInstBomb : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             PlantarBomba();
             BombCount.Obj.BombsOnScreen();
@@ -34,11 +34,12 @@ public class PlayerInstBomb : MonoBehaviour
         Bomba bombBehaviour = bomb.GetComponent<Bomba>();
         bombBehaviour.SummonBomb(playerPosition.position);
 
-        bomb.GetComponent<Bomba>().radioExplosion = radioExplosionActual;
+       // bomb.GetComponent<Bomba>().radioExplosion = radioExplosionActual;
     }
 
     public void MejorarExplosion()
     {
-        radioExplosionActual = radioExplosionActual + 10;
+      //  radioExplosionActual = radioExplosionActual + 10;
+
     }
 }

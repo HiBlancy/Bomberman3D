@@ -4,27 +4,37 @@ using UnityEngine;
 
 public class PossiblityForUpgrade : MonoBehaviour
 {
-    public List<GameObject> upgradePrefabs; // Lista de prefabs para diferentes tipos de upgrades.
+    //public List<GameObject> upgradePrefabs; // Lista de prefabs para diferentes tipos de upgrades.
+    public GameObject powerup_prefab;
 
+    void Start()
+    {
+        powerup_prefab = (GameObject)Resources.Load("GameManager", typeof(GameObject));
+
+
+    }
     void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Explotion"))
         {
+
+            //Create small particle system of explotion
+
             BlocksOnScreen.Obj.BlockDestroyed();
             Debug.Log("blocsssss");
 
-            if (Random.Range(0.0f, 1.0f) > 0.7f)
-                GenerateRandomUpgrade();
+            if (Random.Range(0.0f, 1.0f) > 0.3f)
+                Instantiate(powerup_prefab, transform.position, Quaternion.identity);
 
             Destroy(gameObject);
         }
     }
 
-    private void GenerateRandomUpgrade()
-    {
-        int randomIndex = Random.Range(0, upgradePrefabs.Count);
-        GameObject upgradePrefab = upgradePrefabs[randomIndex];
+    //private void GenerateRandomUpgrade()
+    //{
+    //    int randomIndex = Random.Range(0, upgradePrefabs.Count);
+    //    GameObject upgradePrefab = upgradePrefabs[randomIndex];
 
-        _ = Instantiate(upgradePrefab, transform.position, Quaternion.identity);
-    }
+    //    _ = Instantiate(upgradePrefab, transform.position, Quaternion.identity);
+    //}
 }
