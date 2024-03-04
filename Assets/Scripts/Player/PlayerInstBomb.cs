@@ -8,6 +8,9 @@ public class PlayerInstBomb : MonoBehaviour
     public GameObject bombaPrefab;
     //public int radioExplosionActual;
     [SerializeField] Transform playerPosition;
+
+    [SerializeField] AudioSource audioClip;
+
     public static PlayerInstBomb Obj { get; private set; }
 
     void Awake()
@@ -16,6 +19,8 @@ public class PlayerInstBomb : MonoBehaviour
             Destroy(this);
         else
             Obj = this;
+
+        audioClip = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -29,6 +34,7 @@ public class PlayerInstBomb : MonoBehaviour
 
     void PlantarBomba()
     {
+        audioClip.Play();
         GameObject bomb = PoolManager.Obj.BombPool.GetElement();
 
         Bomba bombBehaviour = bomb.GetComponent<Bomba>();

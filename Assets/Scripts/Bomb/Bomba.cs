@@ -21,6 +21,8 @@ public class Bomba : MonoBehaviour
 
     void Explotar()
     {
+        //
+
         PoolManager.Obj.BombPool.ReturnElement(this.gameObject);
         BombCount.Obj.bombsOnScreen--;
 

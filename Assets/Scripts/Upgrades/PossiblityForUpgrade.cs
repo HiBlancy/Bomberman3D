@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class PossiblityForUpgrade : MonoBehaviour
 {
-    //public List<GameObject> upgradePrefabs; // Lista de prefabs para diferentes tipos de upgrades.
     public GameObject powerup_prefab;
 
     void Start()
     {
         powerup_prefab = (GameObject)Resources.Load("GameManager", typeof(GameObject));
-
-
     }
     void OnTriggerEnter(Collider collision)
     {
@@ -29,12 +26,4 @@ public class PossiblityForUpgrade : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    //private void GenerateRandomUpgrade()
-    //{
-    //    int randomIndex = Random.Range(0, upgradePrefabs.Count);
-    //    GameObject upgradePrefab = upgradePrefabs[randomIndex];
-
-    //    _ = Instantiate(upgradePrefab, transform.position, Quaternion.identity);
-    //}
 }

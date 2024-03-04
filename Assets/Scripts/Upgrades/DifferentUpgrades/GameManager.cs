@@ -14,6 +14,13 @@ public class GameManager : MonoBehaviour
 
     public POWERUPS powerup;
 
+    [SerializeField] AudioSource audioClip;
+
+    private void Awake()
+    {
+        audioClip = GetComponent<AudioSource>();
+    }
+
     public void Start()
     {
         powerup = (POWERUPS)Random.Range(0, 4);
@@ -44,8 +51,9 @@ public class GameManager : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-
+            Debug.Log("jugadir choco");
             Player player = collider.GetComponent<Player>();
+            audioClip.Play();
 
             switch (powerup)
             {
