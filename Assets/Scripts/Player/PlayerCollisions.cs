@@ -21,7 +21,6 @@ public class PlayerCollisions : MonoBehaviour
         if (collision.CompareTag("powerup"))
         {
             audioClip.Play();
-        }
-            
+        }     
     }
 }

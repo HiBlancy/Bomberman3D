@@ -10,20 +10,28 @@ public class PossiblityForUpgrade : MonoBehaviour
     {
         powerup_prefab = (GameObject)Resources.Load("GameManager", typeof(GameObject));
     }
+
     void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Explotion"))
         {
-
-            //Create small particle system of explotion
+            //Create small particle system of explotion?
 
             BlocksOnScreen.Obj.BlockDestroyed();
-            Debug.Log("blocsssss");
 
-            if (Random.Range(0.0f, 1.0f) > 0.3f)
+            if (Random.Range(0.0f, 1.0f) > 0.5f)
                 Instantiate(powerup_prefab, transform.position, Quaternion.identity);
 
             Destroy(gameObject);
         }
+    }
+    void OnEnable()
+    {
+        BlocksOnScreen.Obj.BlockDestroyed();
+
+        if (Random.Range(0.0f, 1.0f) > 0.5f)
+            Instantiate(powerup_prefab, transform.position, Quaternion.identity);
+
+        Destroy(gameObject);
     }
 }

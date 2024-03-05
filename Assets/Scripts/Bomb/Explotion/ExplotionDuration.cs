@@ -21,4 +21,11 @@ public class ExplotionDuration : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+            { Debug.Log("player hit explostion"); }
+
+    }
 }

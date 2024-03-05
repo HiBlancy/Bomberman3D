@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8225540737920510560}
   m_Layer: 7
   m_Name: First Person Audio
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 23087463268523072}
   m_Layer: 7
   m_Name: Capsule Mesh
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 114503055206606986}
   m_Layer: 7
   m_Name: Ground Check
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 114657890492222300}
   m_Layer: 7
   m_Name: First Person Camera
-  m_TagString: MainCamera
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -389,9 +389,9 @@ GameObject:
   - component: {fileID: 114963311885979670}
   - component: {fileID: 8938827113561997664}
   - component: {fileID: 6800263257107764038}
+  - component: {fileID: 633634695}
   - component: {fileID: 451148494}
   - component: {fileID: 451148504}
-  - component: {fileID: 633634695}
   m_Layer: 7
   m_Name: First Person Controller
   m_TagString: Player
@@ -489,42 +489,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 633634695}
---- !u!114 &451148494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773623360729482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a020bc012a801f64494111f6616a11dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBoombs: 0
-  bombsOnScreen: 0
---- !u!114 &451148504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773623360729482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c67e233c5aff9274998ab66dcbd7fc2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bombcount_label: {fileID: 0}
-  life_label: {fileID: 0}
-  bombspeed_label: {fileID: 0}
-  explosion_label: {fileID: 0}
-  speedplayer_label: {fileID: 0}
-  moveSpeed: 5
-  bombs: 1
-  explosion_power: 2
-  lifes: 1
-  speedbomb: 5
 --- !u!82 &633634695
 AudioSource:
   m_ObjectHideFlags: 0
@@ -622,6 +586,42 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &451148494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773623360729482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a020bc012a801f64494111f6616a11dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialBoombs: 0
+  bombsOnScreen: 0
+--- !u!114 &451148504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773623360729482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67e233c5aff9274998ab66dcbd7fc2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bombcount_label: {fileID: 0}
+  life_label: {fileID: 0}
+  bombspeed_label: {fileID: 0}
+  explosion_label: {fileID: 0}
+  speedplayer_label: {fileID: 0}
+  moveSpeed: 5
+  bombs: 1
+  explosion_power: 2
+  lifes: 1
+  speedbomb: 5
 --- !u!1 &695710598036886167
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,12 +631,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 663063259070103767}
-  - component: {fileID: 3952821723313908758}
   - component: {fileID: 8471288420780451152}
   - component: {fileID: 951878351}
   m_Layer: 7
   m_Name: BombSpawner
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -656,19 +655,6 @@ Transform:
   m_Father: {fileID: 4207293392497186}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3952821723313908758
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 695710598036886167}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8471288420780451152
 MonoBehaviour:
   m_ObjectHideFlags: 0
