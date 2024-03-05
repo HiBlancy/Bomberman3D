@@ -10,7 +10,14 @@ public class Bomba : MonoBehaviour
     public LayerMask capasObjetosDestructibles;
     public GameObject sistemaParticulasExplosion;
 
-        public void SummonBomb(Vector3 startPosition)
+    [SerializeField] AudioSource audioClip;
+
+    private void Awake()
+    {
+        audioClip = GetComponent<AudioSource>();
+    }
+
+    public void SummonBomb(Vector3 startPosition)
     {
         gameObject.SetActive(true);
         this.transform.position = startPosition;
@@ -19,8 +26,10 @@ public class Bomba : MonoBehaviour
 
     void Explotar()
     {
-        PoolManager.Obj.BombPool.ReturnElement(this.gameObject);
-        BombCount.Obj.bombsOnScreen--;
+        audioClip.Play();
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+        Invoke("DestroySelf", 0.6f);
 
         CreateExplosions(Vector3.forward);
         CreateExplosions(Vector3.right);
@@ -62,5 +71,13 @@ public class Bomba : MonoBehaviour
             foreach (Vector3 explosionPos in instantiate_list)
                 Instantiate(sistemaParticulasExplosion, explosionPos, Quaternion.identity);
         }
+    }
+
+    void DestroySelf()
+    {
+        PoolManager.Obj.BombPool.ReturnElement(this.gameObject);
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+
+        PlayerInstBomb.Obj.BombExploded();
     }
 }

@@ -6,17 +6,19 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] GameObject gameOverPanel;
+
     [SerializeField] Text bombcount_label;
     [SerializeField] Text life_label;
     [SerializeField] Text bombspeed_label;
     [SerializeField] Text explosion_label;
     [SerializeField] Text speedplayer_label;
 
-    public float moveSpeed = 5f;
-    public int bombs = 1;
+    public float moveSpeed = 5f; //
+    public int bombs = 1;  //
     public int explosion_power = 2;
-    public int lifes = 1;
-    public float speedbomb = 10f;   
+    public int lifes = 1; //
+    public float speedbomb = 10f;
 
     public void UpdatePowerUpsOnScreen(POWERUPS powerup)
     {
@@ -37,6 +39,40 @@ public class Player : MonoBehaviour
             case POWERUPS.PlayerHealth:
                 life_label.text = lifes.ToString();
                 break;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Explotion"))
+        {
+            LoseHealth();
+            Debug.Log("It Will Take 1 life");
+        }
+    }
+
+    void LoseHealth()
+    {
+        lifes--;
+        UpdatePowerUpsOnScreen(POWERUPS.PlayerHealth);
+        // takeDamageSound.Play();
+
+        if (lifes == 0)
+        {
+            // gameOverSound.Play();
+            gameOverPanel.SetActive(true);
+            Time.timeScale = 0f;
+            GameObject.Find("First Person Camera").GetComponent<FirstPersonLook>().enabled = false;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+    }
+
+    public void CheckOnLifes()
+    {
+        if (lifes <= 3)
+        {
+            lifes = 3;
         }
     }
 }

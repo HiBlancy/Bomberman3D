@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: dc53dc3c280748d4399967bc49411b68, type: 2}
+  explosion: {fileID: 8300000, guid: 5b482e731179b1145bc6bb112fdbf2a2, type: 3}
+  boxesExploding: {fileID: 8300000, guid: 3da8505cb9a34b0418440e5589d03f62, type: 3}
 --- !u!81 &8439125752850104986
 AudioListener:
   m_ObjectHideFlags: 0

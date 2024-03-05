@@ -5,22 +5,26 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
+    public static AudioManager Obj;
 
     [SerializeField] AudioMixer mixer;
 
     public const string MUSIC_KEY = "MusicVolumeGame";
     public const string SFX_KEY = "SfxVolumeGame";
 
+    AudioSource audioSource;
+
     private void Awake()
     {
-        if (instance == null)
+        if (Obj == null)
         {
-            instance = this;
+            Obj = this;
             DontDestroyOnLoad(gameObject);
         }
         else
             Destroy(gameObject);
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void LoadVolume()

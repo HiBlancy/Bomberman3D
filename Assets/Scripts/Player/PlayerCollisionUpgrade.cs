@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCollisions : MonoBehaviour
+public class PlayerCollisionUpgrade : MonoBehaviour
 {
     [SerializeField] AudioSource audioClip;
 
@@ -13,11 +13,6 @@ public class PlayerCollisions : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.CompareTag("Explotion"))
-        {
-            Debug.Log("jugador");
-            //porque detecta multiples veces
-        }
         if (collision.CompareTag("powerup"))
         {
             audioClip.Play();

@@ -11,6 +11,11 @@ public class PlayerInstBomb : MonoBehaviour
 
     [SerializeField] AudioSource audioClip;
 
+    private Player player;
+    public int bombsOnScreen;
+
+    public bool canPuMoreBombs = true;
+
     public static PlayerInstBomb Obj { get; private set; }
 
     void Awake()
@@ -21,14 +26,16 @@ public class PlayerInstBomb : MonoBehaviour
             Obj = this;
 
         audioClip = GetComponent<AudioSource>();
+
+        player = GameObject.Find("First Person Controller").GetComponent<Player>();
     }
 
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && canPuMoreBombs)
         {
             PlantarBomba();
-            BombCount.Obj.BombsOnScreen();
+            BombsOnScreen();
         }
     }
 
@@ -47,5 +54,22 @@ public class PlayerInstBomb : MonoBehaviour
     {
       //  radioExplosionActual = radioExplosionActual + 10;
 
+    }
+
+    public void BombsOnScreen()
+    {
+        bombsOnScreen++;
+
+        //si hay el mismo numero de bombas que no se pueda sacar mas
+        if (player.bombs == bombsOnScreen) //como hacer para que me detecte que no puede poner mas bombas
+            canPuMoreBombs = false;
+    }
+
+    public void BombExploded()
+    {
+        bombsOnScreen--;
+
+        if (player.bombs != bombsOnScreen)
+            canPuMoreBombs = true;
     }
 }

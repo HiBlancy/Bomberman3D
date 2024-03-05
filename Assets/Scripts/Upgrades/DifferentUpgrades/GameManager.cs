@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
             {
                 case POWERUPS.PlayerSpeed:
                     Debug.Log("PlayerSpeed");
-                    player.moveSpeed++;
+                    player.moveSpeed = player.moveSpeed + 0.5f;
                     break;
                 case POWERUPS.BombPower:
                     Debug.Log("BombPower");
@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
                 case POWERUPS.PlayerHealth:
                     Debug.Log("PlayerHealth");
                     player.lifes++;
+                    player.CheckOnLifes();
                     break;
             }
             Destroy(gameObject);

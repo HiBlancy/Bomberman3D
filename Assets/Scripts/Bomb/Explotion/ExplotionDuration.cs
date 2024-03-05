@@ -4,16 +4,8 @@ using UnityEngine;
 
 public class ExplotionDuration : MonoBehaviour
 {
-    [SerializeField] AudioSource audioClip;
-
-    private void Awake()
-    {
-        audioClip = GetComponent<AudioSource>();
-    }
-
     private void OnEnable()
     {
-        audioClip.Play();
         Invoke("DisableElement", 4f);
     }
 
@@ -26,6 +18,5 @@ public class ExplotionDuration : MonoBehaviour
     {
         if (other.CompareTag("Player"))
             { Debug.Log("player hit explostion"); }
-
     }
 }
