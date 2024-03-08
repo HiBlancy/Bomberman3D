@@ -10,6 +10,8 @@ public class PauseDisplay : MonoBehaviour
 
     [SerializeField] GameObject PanelOptions;
 
+    [SerializeField] GameObject GameOverPanel;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -62,5 +64,16 @@ public class PauseDisplay : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenuScene");
+    }
+
+    public void RetryGame()
+    {
+        Time.timeScale = 1f;
+        GameObject.Find("First Person Camera").GetComponent<FirstPersonLook>().enabled = true; //is this correct?
+        Cursor.lockState = CursorLockMode.Locked;
+        GameOverPanel.SetActive(false);
+        Cursor.visible = false;
+
+        SceneManager.LoadScene("GameScene");
     }
 }

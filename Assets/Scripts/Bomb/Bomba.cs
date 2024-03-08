@@ -5,23 +5,26 @@ using UnityEngine;
 
 public class Bomba : MonoBehaviour
 {
-    public float tiempoExplosion = 3f;
     public int radioExplosion = 2;
     public LayerMask capasObjetosDestructibles;
     public GameObject sistemaParticulasExplosion;
 
     [SerializeField] AudioSource audioClip;
 
+    Player player;
+
     private void Awake()
     {
         audioClip = GetComponent<AudioSource>();
+
+        player = GameObject.Find("First Person Controller").GetComponent<Player>();
     }
 
     public void SummonBomb(Vector3 startPosition)
     {
         gameObject.SetActive(true);
         this.transform.position = startPosition;
-        Invoke("Explotar", tiempoExplosion);
+        Invoke("Explotar", player.speedbomb);
     }
 
     void Explotar()

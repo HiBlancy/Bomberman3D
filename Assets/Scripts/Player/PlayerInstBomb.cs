@@ -11,7 +11,7 @@ public class PlayerInstBomb : MonoBehaviour
 
     [SerializeField] AudioSource audioClip;
 
-    private Player player;
+    Player player;
     public int bombsOnScreen;
 
     public bool canPuMoreBombs = true;
@@ -47,13 +47,7 @@ public class PlayerInstBomb : MonoBehaviour
         Bomba bombBehaviour = bomb.GetComponent<Bomba>();
         bombBehaviour.SummonBomb(playerPosition.position);
 
-       // bomb.GetComponent<Bomba>().radioExplosion = radioExplosionActual;
-    }
-
-    public void MejorarExplosion()
-    {
-      //  radioExplosionActual = radioExplosionActual + 10;
-
+        player.explosion_power = bomb.GetComponent<Bomba>().radioExplosion;
     }
 
     public void BombsOnScreen()

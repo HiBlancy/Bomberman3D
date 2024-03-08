@@ -16,9 +16,24 @@ public class Player : MonoBehaviour
 
     public float moveSpeed = 5f; //
     public int bombs = 1;  //
-    public int explosion_power = 2;
+    public int explosion_power = 2; //
     public int lifes = 1; //
-    public float speedbomb = 10f;
+    public float speedbomb = 10f; //
+
+    bool isImmune = false;
+    float immuneTimeCnt = 0f;
+    float immuneTime = 2f;
+
+    void Update()
+    {
+        if (isImmune)
+        {
+            immuneTimeCnt -= Time.deltaTime;
+
+            if (immuneTimeCnt <= 0)
+                isImmune = false;
+        }
+    }
 
     public void UpdatePowerUpsOnScreen(POWERUPS powerup)
     {
@@ -51,11 +66,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    void LoseHealth()
+    public void LoseHealth()
     {
         lifes--;
         UpdatePowerUpsOnScreen(POWERUPS.PlayerHealth);
         // takeDamageSound.Play();
+
+        goImmune();
 
         if (lifes == 0)
         {
@@ -66,6 +83,12 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }
+    }
+
+    void goImmune()
+    {
+        isImmune = true;
+        immuneTimeCnt = immuneTime;
     }
 
     public void CheckOnLifes()
