@@ -7,10 +7,11 @@ public class PlayerHealth : MonoBehaviour
     public static PlayerHealth Obj { get; private set; }
 
     [SerializeField] GameObject gameOverPanel;
+    private Player player;
 
     //[SerializeField] AudioSource gameOverSound;
     //[SerializeField] AudioSource takeDamageSound;
-    public int playerLives;
+
     void Awake()
     {
         if (Obj != null && Obj != this)
@@ -21,15 +22,15 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
-        playerLives = 3;
+        player = GetComponent<Player>();
     }
 
     public void LoseHealt()
     {
-        playerLives--;
+        player.lifes--;
         // takeDamageSound.Play();
 
-        if (playerLives <= 0)
+        if (player.lifes <= 0)
         {
            // gameOverSound.Play();
             gameOverPanel.SetActive(true);
@@ -41,9 +42,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void GiveHeath()
     {
-        if(playerLives !<= 3)
+        if(player.lifes! <= 3)
         {
-            playerLives++;
+            player.lifes++;
         }
     }
 }

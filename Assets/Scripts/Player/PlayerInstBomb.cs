@@ -8,6 +8,14 @@ public class PlayerInstBomb : MonoBehaviour
     public GameObject bombaPrefab;
     //public int radioExplosionActual;
     [SerializeField] Transform playerPosition;
+
+    [SerializeField] AudioSource audioClip;
+
+    Player player;
+    public int bombsOnScreen;
+
+    public bool canPuMoreBombs = true;
+
     public static PlayerInstBomb Obj { get; private set; }
 
     void Awake()
@@ -16,30 +24,46 @@ public class PlayerInstBomb : MonoBehaviour
             Destroy(this);
         else
             Obj = this;
+
+        audioClip = GetComponent<AudioSource>();
+
+        player = GameObject.Find("First Person Controller").GetComponent<Player>();
     }
 
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && canPuMoreBombs)
         {
             PlantarBomba();
-            BombCount.Obj.BombsOnScreen();
+            BombsOnScreen();
         }
     }
 
     void PlantarBomba()
     {
+        audioClip.Play();
         GameObject bomb = PoolManager.Obj.BombPool.GetElement();
 
         Bomba bombBehaviour = bomb.GetComponent<Bomba>();
         bombBehaviour.SummonBomb(playerPosition.position);
 
-       // bomb.GetComponent<Bomba>().radioExplosion = radioExplosionActual;
+        player.explosion_power = bomb.GetComponent<Bomba>().radioExplosion;
     }
 
-    public void MejorarExplosion()
+    public void BombsOnScreen()
     {
-      //  radioExplosionActual = radioExplosionActual + 10;
+        bombsOnScreen++;
 
+        //si hay el mismo numero de bombas que no se pueda sacar mas
+        if (player.bombs == bombsOnScreen) //como hacer para que me detecte que no puede poner mas bombas
+            canPuMoreBombs = false;
+    }
+
+    public void BombExploded()
+    {
+        bombsOnScreen--;
+
+        if (player.bombs != bombsOnScreen)
+            canPuMoreBombs = true;
     }
 }

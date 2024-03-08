@@ -39,19 +39,25 @@ public class GameManager : MonoBehaviour
         }
         GameObject go = Instantiate(curr, transform.position, Quaternion.identity) as GameObject;
         go.GetComponent<Transform>().SetParent(this.transform);
+        Invoke("SelfDestroy", 10f);
     }
+
+    void SelfDestroy()
+    {
+        Destroy(gameObject);
+    }
+
     void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Player"))
         {
-
             Player player = collider.GetComponent<Player>();
 
             switch (powerup)
             {
                 case POWERUPS.PlayerSpeed:
                     Debug.Log("PlayerSpeed");
-                    player.moveSpeed++;
+                    player.moveSpeed = player.moveSpeed + 0.5f;
                     break;
                 case POWERUPS.BombPower:
                     Debug.Log("BombPower");
@@ -68,6 +74,7 @@ public class GameManager : MonoBehaviour
                 case POWERUPS.PlayerHealth:
                     Debug.Log("PlayerHealth");
                     player.lifes++;
+                    player.CheckOnLifes();
                     break;
             }
             Destroy(gameObject);

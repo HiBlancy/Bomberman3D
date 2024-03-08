@@ -5,31 +5,39 @@ using UnityEngine;
 
 public class Bomba : MonoBehaviour
 {
-    public float tiempoExplosion = 3f;
     public int radioExplosion = 2;
     public LayerMask capasObjetosDestructibles;
     public GameObject sistemaParticulasExplosion;
 
-    bool exploded = false;
+    [SerializeField] AudioSource audioClip;
+
+    Player player;
+
+    private void Awake()
+    {
+        audioClip = GetComponent<AudioSource>();
+
+        player = GameObject.Find("First Person Controller").GetComponent<Player>();
+    }
 
     public void SummonBomb(Vector3 startPosition)
     {
         gameObject.SetActive(true);
         this.transform.position = startPosition;
-        Invoke("Explotar", tiempoExplosion);
+        Invoke("Explotar", player.speedbomb);
     }
 
     void Explotar()
     {
-        PoolManager.Obj.BombPool.ReturnElement(this.gameObject);
-        BombCount.Obj.bombsOnScreen--;
+        audioClip.Play();
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+        Invoke("DestroySelf", 0.6f);
 
         CreateExplosions(Vector3.forward);
         CreateExplosions(Vector3.right);
         CreateExplosions(Vector3.back);
         CreateExplosions(Vector3.left);
-
-        exploded = true;
     }
 
     void CreateExplosions(Vector3 direccion)
@@ -40,45 +48,39 @@ public class Bomba : MonoBehaviour
         {
             RaycastHit hit;
             Vector3 raycastPosition = transform.position + direccion * i;
-
+            
             Physics.Raycast(transform.position, direccion, out hit, i, capasObjetosDestructibles);
-            Debug.DrawLine(transform.position, raycastPosition, Color.green, 5f);
+            Debug.DrawLine(transform.position, raycastPosition, Color.green, 3f);
 
             if (!hit.collider)
             {
                 instantiate_list.Add(raycastPosition);
-                Debug.Log("nothing");
             }
             else
             {
                 if (hit.collider.CompareTag("Block"))
                 {
                     instantiate_list.Add(raycastPosition);
-                    //destruir caja
-                    Debug.Log("Raycast impacto en: " + hit.collider.gameObject.name);
                     hit.collider.gameObject.GetComponent<PossiblityForUpgrade>().enabled = true;
                 }
-                else if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("powerup"))
+                else if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("powerup") || hit.collider.CompareTag("Bomb"))
                 {
                     instantiate_list.Add(raycastPosition);
-                    Debug.Log("Raycast impacto en: " + hit.collider.gameObject.name);
-                    //quitar vida al jugador
                     continue;
                 }
                 break;
+                
             }
+            foreach (Vector3 explosionPos in instantiate_list)
+                Instantiate(sistemaParticulasExplosion, explosionPos, Quaternion.identity);
         }
-        foreach (Vector3 explosionPos in instantiate_list)
-            Instantiate(sistemaParticulasExplosion, explosionPos, Quaternion.identity);
     }
 
-    void OnCollisionEnter(Collision collision)
+    void DestroySelf()
     {
-        if (!exploded && collision.collider.CompareTag("Bomb"))
-        {
-            Debug.Log("bomba");
-            CancelInvoke("Explotar");
-            Explotar();
-        }
+        PoolManager.Obj.BombPool.ReturnElement(this.gameObject);
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+
+        PlayerInstBomb.Obj.BombExploded();
     }
 }

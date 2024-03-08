@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class ExplotionDuration : MonoBehaviour
 {
+
+    Player player;
+
+    private void Awake()
+    {
+        player = GameObject.Find("First Person Controller").GetComponent<Player>();
+    }
+
     private void OnEnable()
     {
         Invoke("DisableElement", 4f);
@@ -12,5 +20,11 @@ public class ExplotionDuration : MonoBehaviour
     void DisableElement()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+            player.LoseHealth();
     }
 }
