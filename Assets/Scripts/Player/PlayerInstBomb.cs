@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerInstBomb : MonoBehaviour
 {
     public GameObject bombaPrefab;
-    //public int radioExplosionActual;
     [SerializeField] Transform playerPosition;
 
     [SerializeField] AudioSource audioClip;
@@ -15,6 +15,11 @@ public class PlayerInstBomb : MonoBehaviour
     public int bombsOnScreen;
 
     public bool canPuMoreBombs = true;
+
+    public LayerMask m_LayerMask;
+
+    public Transform puntoDeReferencia;
+    public float radioDeColision = 0.5f;
 
     public static PlayerInstBomb Obj { get; private set; }
 
@@ -34,9 +39,19 @@ public class PlayerInstBomb : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && canPuMoreBombs)
         {
-            PlantarBomba();
-            BombsOnScreen();
+            if(!IsCollosion())
+            {
+                PlantarBomba();
+                BombsOnScreen();
+            }          
         }
+    }
+
+    bool IsCollosion()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(puntoDeReferencia.position, radioDeColision, m_LayerMask);
+
+        return hitColliders.Length > 0;
     }
 
     void PlantarBomba()
@@ -57,7 +72,6 @@ public class PlayerInstBomb : MonoBehaviour
     {
         bombsOnScreen++;
 
-        //si hay el mismo numero de bombas que no se pueda sacar mas
         if (player.bombs == bombsOnScreen) //como hacer para que me detecte que no puede poner mas bombas
             canPuMoreBombs = false;
     }

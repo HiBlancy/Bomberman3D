@@ -561,11 +561,13 @@ MonoBehaviour:
   bombspeed_label: {fileID: 0}
   explosion_label: {fileID: 0}
   speedplayer_label: {fileID: 0}
+  kickbomb_label: {fileID: 0}
   moveSpeed: 5
   bombs: 1
   explosion_power: 2
   lifes: 2
   speedbomb: 5
+  kickBomb: 0
 --- !u!1 &695710598036886167
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,6 +619,8 @@ MonoBehaviour:
   audioClip: {fileID: 951878351}
   bombsOnScreen: 0
   canPuMoreBombs: 1
+  centroDelArea: {x: 0, y: 0, z: 0}
+  "tama\xF1oDelArea": {x: 1, y: 1, z: 1}
 --- !u!82 &951878351
 AudioSource:
   m_ObjectHideFlags: 0
