@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Bomba : MonoBehaviour
 {
-    public int radioExplosion = 2;
+    public int explosion_power = 2;
     public LayerMask capasObjetosDestructibles;
     public GameObject sistemaParticulasExplosion;
 
@@ -44,13 +44,13 @@ public class Bomba : MonoBehaviour
     {
         List<Vector3> instantiate_list = new List<Vector3>();
 
-        for (float i = 1; i < radioExplosion; i++)
+        for (float i = 1; i < explosion_power; i++)
         {
             RaycastHit hit;
             Vector3 raycastPosition = transform.position + direccion * i;
-            
-            Physics.Raycast(transform.position, direccion, out hit, i, capasObjetosDestructibles);
-            Debug.DrawLine(transform.position, raycastPosition, Color.green, 3f);
+
+            Physics.Raycast(transform.position, direccion, out hit, i);
+            Debug.DrawLine(transform.position, raycastPosition, Color.green, 5f);
 
             if (!hit.collider)
             {
@@ -62,18 +62,18 @@ public class Bomba : MonoBehaviour
                 {
                     instantiate_list.Add(raycastPosition);
                     hit.collider.gameObject.GetComponent<PossiblityForUpgrade>().enabled = true;
+
                 }
-                else if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("powerup") || hit.collider.CompareTag("Bomb"))
+                else if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("powerup"))
                 {
                     instantiate_list.Add(raycastPosition);
                     continue;
                 }
                 break;
-                
             }
-            foreach (Vector3 explosionPos in instantiate_list)
-                Instantiate(sistemaParticulasExplosion, explosionPos, Quaternion.identity);
         }
+        foreach (Vector3 explosionPos in instantiate_list)
+            Instantiate(sistemaParticulasExplosion, explosionPos, Quaternion.identity);
     }
 
     void DestroySelf()

@@ -8,5 +8,6 @@ public enum POWERUPS
     BombPower,
     BombSpeed,
     BombCount,
-    PlayerHealth
+    PlayerHealth,
+    KickBomb
 }

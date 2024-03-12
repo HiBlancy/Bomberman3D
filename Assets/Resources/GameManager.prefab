@@ -55,6 +55,8 @@ MonoBehaviour:
     type: 3}
   playerhealth: {fileID: 8931985276695957437, guid: f420973239d386f4d840ee2227b5e220,
     type: 3}
+  kickbomb: {fileID: 2749620822983120214, guid: 7c9dfc47d74044e4d9ff3996b536e953,
+    type: 3}
   powerup: 0
 --- !u!135 &2216489968729315672
 SphereCollider:

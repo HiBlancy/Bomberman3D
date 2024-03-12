@@ -17,8 +17,6 @@ public class PossiblityForUpgrade : MonoBehaviour
         {
             //Create small particle system of explotion?
 
-            BlocksOnScreen.Obj.BlockDestroyed();
-
             if (Random.Range(0.0f, 1.0f) > 0.5f)
                 Instantiate(powerup_prefab, transform.position, Quaternion.identity);
 
@@ -27,8 +25,6 @@ public class PossiblityForUpgrade : MonoBehaviour
     }
     void OnEnable()
     {
-        BlocksOnScreen.Obj.BlockDestroyed();
-
         if (Random.Range(0.0f, 1.0f) > 0.5f)
             Instantiate(powerup_prefab, transform.position, Quaternion.identity);
 

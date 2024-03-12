@@ -12,25 +12,33 @@ public class Player : MonoBehaviour
     [SerializeField] Text life_label;
     [SerializeField] Text bombspeed_label;
     [SerializeField] Text explosion_label;
-    [SerializeField] Text speedplayer_label;
+    [SerializeField] Text speedplayer_label;   
+    [SerializeField] Text kickbomb_label;   
 
     public float moveSpeed = 5f; //
     public int bombs = 1;  //
     public int explosion_power = 2; //
-    public int lifes = 1; //
+    public int lifes = 2; //
     public float speedbomb = 10f; //
+    public bool kickBomb = false;
 
     bool isImmune = false;
-    float immuneTimeCnt = 0f;
     float immuneTime = 2f;
+
+    PlayerCollisionBomb playerhurtsound;
+
+    void Awake()
+    {
+        playerhurtsound = GameObject.Find("Capsule Mesh").GetComponent<PlayerCollisionBomb>();
+    }
 
     void Update()
     {
         if (isImmune)
         {
-            immuneTimeCnt -= Time.deltaTime;
+            immuneTime -= Time.deltaTime;
 
-            if (immuneTimeCnt <= 0)
+            if (immuneTime <= 0)
                 isImmune = false;
         }
     }
@@ -54,15 +62,18 @@ public class Player : MonoBehaviour
             case POWERUPS.PlayerHealth:
                 life_label.text = lifes.ToString();
                 break;
+            case POWERUPS.KickBomb:
+                kickbomb_label.text = kickBomb.ToString();
+                break;
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.collider.CompareTag("Explotion"))
+        if (collision.CompareTag("Explotion") && !isImmune)
         {
             LoseHealth();
-            Debug.Log("It Will Take 1 life");
+            playerhurtsound.HurtSound();
         }
     }
 
@@ -70,7 +81,6 @@ public class Player : MonoBehaviour
     {
         lifes--;
         UpdatePowerUpsOnScreen(POWERUPS.PlayerHealth);
-        // takeDamageSound.Play();
 
         goImmune();
 
@@ -88,14 +98,11 @@ public class Player : MonoBehaviour
     void goImmune()
     {
         isImmune = true;
-        immuneTimeCnt = immuneTime;
     }
 
     public void CheckOnLifes()
     {
-        if (lifes <= 3)
-        {
+        if (lifes >= 3)
             lifes = 3;
-        }
     }
 }

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class FirstPersonMovement : MonoBehaviour
 {
-    //public float playersSpeed = 5;
     private Player player;
 
     Rigidbody rB;
@@ -13,7 +12,6 @@ public class FirstPersonMovement : MonoBehaviour
 
     void Awake()
     {
-        // Get the rigidbody on this.
         rB = GetComponent<Rigidbody>();
         player = GetComponent<Player>();
     }
@@ -23,9 +21,7 @@ public class FirstPersonMovement : MonoBehaviour
         // Get targetMovingSpeed.
         float targetMovingSpeed = player.moveSpeed;
         if (speedOverrides.Count > 0)
-        {
             targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
-        }
 
         // Get targetVelocity from input.
         Vector2 targetVelocity = new Vector2( Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);

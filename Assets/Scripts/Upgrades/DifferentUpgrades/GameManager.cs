@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject bombspeed;
     public GameObject bombcount;
     public GameObject playerhealth;
+    public GameObject kickbomb;
 
     private GameObject curr;
 
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        powerup = (POWERUPS)Random.Range(0, 4);
+        powerup = (POWERUPS)Random.Range(0, 5);
         switch (powerup)
         {
             case POWERUPS.PlayerSpeed:
@@ -33,6 +34,9 @@ public class GameManager : MonoBehaviour
                 break;
             case POWERUPS.PlayerHealth:
                 curr = playerhealth;
+                break;
+            case POWERUPS.KickBomb:
+                curr = kickbomb;
                 break;
             default:
                 break;
@@ -75,6 +79,10 @@ public class GameManager : MonoBehaviour
                     Debug.Log("PlayerHealth");
                     player.lifes++;
                     player.CheckOnLifes();
+                    break;
+                case POWERUPS.KickBomb:
+                    Debug.Log("Can KickBomb");
+                    player.kickBomb = true;
                     break;
             }
             Destroy(gameObject);

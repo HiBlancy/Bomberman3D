@@ -11,13 +11,8 @@ public class PlayerCollisionBomb : MonoBehaviour
         audioClip = GetComponent<AudioSource>();
     }
 
-    void OnTriggerEnter(Collider collision)
+    public void HurtSound()
     {
-        if (collision.CompareTag("Explotion"))
-        {
-            Debug.Log("jugador");
-            audioClip.Play();
-            //porque detecta multiples veces
-        }
+        audioClip.Play();
     }
 }

@@ -47,7 +47,10 @@ public class PlayerInstBomb : MonoBehaviour
         Bomba bombBehaviour = bomb.GetComponent<Bomba>();
         bombBehaviour.SummonBomb(playerPosition.position);
 
-        player.explosion_power = bomb.GetComponent<Bomba>().radioExplosion;
+        bomb.GetComponent<Bomba>().explosion_power = player.explosion_power;
+
+        if (player.kickBomb)
+            bomb.GetComponent<Rigidbody>().isKinematic = false;
     }
 
     public void BombsOnScreen()
