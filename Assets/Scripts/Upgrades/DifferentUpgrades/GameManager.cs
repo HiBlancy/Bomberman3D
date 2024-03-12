@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
                     break;
                 case POWERUPS.BombPower:
                     Debug.Log("BombPower");
-                    player.explosion_power++; //mirar si +1 o +2
+                    player.explosion_power++;
                     break;
                 case POWERUPS.BombSpeed:
                     Debug.Log("BombSpeed");
