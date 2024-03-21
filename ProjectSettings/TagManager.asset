@@ -9,6 +9,7 @@ TagManager:
   - Block
   - powerup
   - Bomb
+  - AI
   layers:
   - Default
   - TransparentFX
@@ -19,11 +20,11 @@ TagManager:
   - Blocks
   - Player
   - Explotion
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Brick
+  - Floor
+  - Walls
+  - PowerUp
+  - Bomb
   - 
   - 
   - 

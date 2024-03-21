@@ -41,7 +41,7 @@ public class PlayerInstBomb : MonoBehaviour
         {
             if(!IsCollosion())
             {
-                PlantarBomba();
+                PlantBomb();
                 BombsOnScreen();
             }          
         }
@@ -54,7 +54,7 @@ public class PlayerInstBomb : MonoBehaviour
         return hitColliders.Length > 0;
     }
 
-    void PlantarBomba()
+    void PlantBomb()
     {
         audioClip.Play();
         GameObject bomb = PoolManager.Obj.BombPool.GetElement();

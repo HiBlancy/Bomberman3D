@@ -7,7 +7,7 @@ public class Pool : MonoBehaviour
     [SerializeField] GameObject poolElementPrefab;
     List<GameObject> _pool = new List<GameObject>();
 
-    public int amoutToPool = 10;
+    public int amoutToPool;
 
     void Awake()
     {

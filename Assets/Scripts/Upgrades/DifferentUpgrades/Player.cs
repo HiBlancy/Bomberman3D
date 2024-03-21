@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     public float speedbomb = 10f; //
     public bool kickBomb = false;
 
+    int maxBombs = 10;
+
     bool isImmune = false;
     float immuneTime = 2f;
 
@@ -68,7 +70,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider collision)
+    void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Explotion") && !isImmune)
         {
@@ -77,7 +79,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void LoseHealth()
+    void LoseHealth()
     {
         lifes--;
         UpdatePowerUpsOnScreen(POWERUPS.PlayerHealth);
@@ -104,5 +106,11 @@ public class Player : MonoBehaviour
     {
         if (lifes >= 3)
             lifes = 3;
+    }
+
+    public void CheckOnBombs()
+    {
+        if (maxBombs <= bombs)
+            bombs = 10;
     }
 }

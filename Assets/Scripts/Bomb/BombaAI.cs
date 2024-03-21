@@ -1,29 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Bomba : MonoBehaviour
+public class BombaAI : MonoBehaviour
 {
     public int explosion_power = 2;
     public LayerMask capasObjetosDestructibles;
 
     [SerializeField] AudioSource audioClip;
 
-    Player player;
+    AIController ai;
 
     private void Awake()
     {
         audioClip = GetComponent<AudioSource>();
 
-        player = GameObject.Find("First Person Controller").GetComponent<Player>();
+        ai = GameObject.Find("AI").GetComponent<AIController>();
     }
 
     public void SummonBomb(Vector3 startPosition)
     {
         gameObject.SetActive(true);
         this.transform.position = startPosition;
-        Invoke("Explotar", player.speedbomb);
+        Invoke("Explotar", ai.speedbomb);
     }
 
     void Explotar()
@@ -44,7 +43,7 @@ public class Bomba : MonoBehaviour
         GameObject explotionPool = PoolManager.Obj.ExplotionPool.GetElement();
 
         List<Vector3> instantiate_list = new List<Vector3>();
-
+        
         for (float i = 1; i < explosion_power; i++)
         {
             RaycastHit hit;
@@ -77,12 +76,12 @@ public class Bomba : MonoBehaviour
         {
             ExplotionDuration explotionBehaviour = explotionPool.GetComponent<ExplotionDuration>();
             explotionBehaviour.ActivateExplotion(explosionPos);
-        }           
+        }
     }
 
     void DestroySelf()
     {
-        PlayerInstBomb.Obj.BombExploded();
+        AIController.Obj.BombExploded(); //??
 
         PoolManager.Obj.BombPool.ReturnElement(this.gameObject);
         gameObject.GetComponent<MeshRenderer>().enabled = true;

@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Upgrade CanKick
       objectReference: {fileID: 0}
+    - target: {fileID: 3976289916293946202, guid: 6f4c26e0801c7d14798d4a04312d2719,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3976289916293946204, guid: 6f4c26e0801c7d14798d4a04312d2719,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
