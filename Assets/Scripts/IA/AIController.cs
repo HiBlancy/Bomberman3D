@@ -36,7 +36,7 @@ public class AIController : MonoBehaviour
     public int lifes = 3;
     public int explosion_power = 2;
     public bool kickBomb = false;
-    public float speedbomb = 10f; 
+    public float speedbomb = 7f; 
     public int bombs = 1;  
 
     int maxBombs = 10;
@@ -49,7 +49,12 @@ public class AIController : MonoBehaviour
     public float fleeDistance = 10f;
 
     public float blockStoppingDistance = 3f;
-    public float powerupStoppingDistance = 0f;
+    public float powerupStoppingDistance = 0.1f;
+
+
+    public float range; //radius of sphere
+
+    public Transform centrePoint;
 
     void Awake()
     {
@@ -112,29 +117,34 @@ public class AIController : MonoBehaviour
 
     void RandomMovement()
     {
-        if (!walkPointSet) SearchWalkPoint();
-
-        if (walkPointSet)
-            agent.SetDestination(walkPoint);
-
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        if (distanceToWalkPoint.magnitude < 1f)
-            walkPointSet = false;
+        if (agent.remainingDistance <= agent.stoppingDistance) //done with path
+        {
+            Vector3 point;
+            if (RandomPoint(centrePoint.position, range, out point)) //pass in our centre point and radius of area
+            {
+                Debug.DrawRay(point, Vector3.up, Color.gray, 5f); //so you can see with gizmos
+                agent.SetDestination(point);
+            }
+        }
 
         if (blockInRange == true) currentState = AIStates.Farm;
+        if (blockInRange == true && bombInRange == true) currentState = AIStates.Dodge;
         if (playerInRange == true) currentState = AIStates.Follow;
         if (upgradeInRange == true) currentState = AIStates.Recolec;
+        if (playerInRange == true && bombInRange == true) currentState = AIStates.Dodge;
     }
-    void SearchWalkPoint()
+    bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
+        Vector3 randomPoint = center + Random.insideUnitSphere * range;
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomPoint, out hit, 10.0f, NavMesh.AllAreas))
+        {
+            result = hit.position;
+            return true;
+        }
 
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-            walkPointSet = true;
+        result = Vector3.zero;
+        return false;
     }
 
     void GoToBlock()
@@ -165,7 +175,7 @@ public class AIController : MonoBehaviour
                     SetBomb();
                 }
             }
-            _ = currentState != AIStates.Farm;
+            _ = currentState != AIStates.Idle;
         }
     }
 
@@ -204,12 +214,12 @@ public class AIController : MonoBehaviour
     void PlantBomb()
     {
         //audioClip.Play();
-        GameObject bomb = PoolManager.Obj.BombPool.GetElement();
+        GameObject bomb = PoolManager.Obj.BombEnemyPool.GetElement();
 
-        Bomba bombBehaviour = bomb.GetComponent<Bomba>();
+        BombaAI bombBehaviour = bomb.GetComponent<BombaAI>();
         bombBehaviour.SummonBomb(AIPosition.position);
 
-        bomb.GetComponent<Bomba>().explosion_power = explosion_power;
+        bomb.GetComponent<BombaAI>().explosion_power = explosion_power;
 
         if (kickBomb)
             bomb.GetComponent<Rigidbody>().isKinematic = false;
@@ -237,15 +247,7 @@ public class AIController : MonoBehaviour
     {    
         if(bombInRange)
         {
-            if (!walkPointSet) SearchWalkPoint();
-
-            if (walkPointSet)
-                agent.SetDestination(walkPoint);
-
-            Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-            if (distanceToWalkPoint.magnitude < 1f)
-                walkPointSet = false;
+            RandomMovement();
         }
         else
         {
@@ -283,6 +285,8 @@ public class AIController : MonoBehaviour
                 }
             }
         }
+        if(!upgradeInRange)
+        { currentState = AIStates.Idle; }
     }
 
         void OnDrawGizmosSelected()

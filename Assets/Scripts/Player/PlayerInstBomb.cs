@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 
 public class PlayerInstBomb : MonoBehaviour
 {
-    public GameObject bombaPrefab;
     [SerializeField] Transform playerPosition;
 
     [SerializeField] AudioSource audioClip;

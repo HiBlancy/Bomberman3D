@@ -566,7 +566,7 @@ MonoBehaviour:
   bombs: 1
   explosion_power: 2
   lifes: 2
-  speedbomb: 5
+  speedbomb: 7
   kickBomb: 0
 --- !u!1 &695710598036886167
 GameObject:
@@ -613,8 +613,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5f36a9a94212014facc2cc5254e0cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombaPrefab: {fileID: 5952181120894435225, guid: 53a1f38a11d898e41b72ba9605d9049b,
-    type: 3}
   playerPosition: {fileID: 663063259070103767}
   audioClip: {fileID: 951878351}
   bombsOnScreen: 0

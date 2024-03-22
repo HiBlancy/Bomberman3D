@@ -27,7 +27,7 @@ public class BombaAI : MonoBehaviour
 
     void Explotar()
     {
-        audioClip.Play();
+        //audioClip.Play();
         gameObject.GetComponent<MeshRenderer>().enabled = false;
 
         Invoke("DestroySelf", 0.6f);
@@ -81,9 +81,9 @@ public class BombaAI : MonoBehaviour
 
     void DestroySelf()
     {
-        AIController.Obj.BombExploded(); //??
+        ai.BombExploded();
 
-        PoolManager.Obj.BombPool.ReturnElement(this.gameObject);
+        PoolManager.Obj.BombEnemyPool.ReturnElement(this.gameObject);
         gameObject.GetComponent<MeshRenderer>().enabled = true;
     }
 }

@@ -86,44 +86,44 @@ public class GameManager : MonoBehaviour
                     player.kickBomb = true;
                     break;
             }
-
-            if (collider.CompareTag("AI"))
-            {
-                AIController Ai = collider.GetComponent<AIController>();
-
-                switch (powerup)
-                {
-                    case POWERUPS.PlayerSpeed:
-                        Debug.Log("AISpeed");
-                        Ai.AIspeed = Ai.AIspeed + 0.5f;
-                        break;
-                    case POWERUPS.BombPower:
-                        Debug.Log("AIBombPower");
-                        Ai.explosion_power++;
-                        break;
-                    case POWERUPS.BombSpeed:
-                        Debug.Log("AIBombSpeed");
-                        Ai.speedbomb--;
-                        break;
-                    case POWERUPS.BombCount:
-                        Debug.Log("AIBombCount");
-                        Ai.bombs++;
-                        Ai.CheckOnBombs();
-                        break;
-                    case POWERUPS.PlayerHealth:
-                        Debug.Log("AIHealth");
-                        Ai.lifes++;
-                        Ai.CheckOnLifes();
-                        break;
-                    case POWERUPS.KickBomb:
-                        Debug.Log("AI Can KickBomb");
-                        Ai.kickBomb = true;
-                        break;
-                }
-
                 Destroy(gameObject);
                 player.UpdatePowerUpsOnScreen(powerup);
+        }
+
+        if (collider.CompareTag("AI"))
+        {
+            AIController Ai = collider.GetComponent<AIController>();
+
+            switch (powerup)
+            {
+                case POWERUPS.PlayerSpeed:
+                    Debug.Log("AISpeed");
+                    Ai.AIspeed = Ai.AIspeed + 0.5f;
+                    break;
+                case POWERUPS.BombPower:
+                    Debug.Log("AIBombPower");
+                    Ai.explosion_power++;
+                    break;
+                case POWERUPS.BombSpeed:
+                    Debug.Log("AIBombSpeed");
+                    Ai.speedbomb--;
+                    break;
+                case POWERUPS.BombCount:
+                    Debug.Log("AIBombCount");
+                    Ai.bombs++;
+                    Ai.CheckOnBombs();
+                    break;
+                case POWERUPS.PlayerHealth:
+                    Debug.Log("AIHealth");
+                    Ai.lifes++;
+                    Ai.CheckOnLifes();
+                    break;
+                case POWERUPS.KickBomb:
+                    Debug.Log("AI Can KickBomb");
+                    Ai.kickBomb = true;
+                    break;
             }
+            Destroy(gameObject);
         }
     }
 }

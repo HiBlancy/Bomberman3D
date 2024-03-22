@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     public int bombs = 1;  //
     public int explosion_power = 2; //
     public int lifes = 2; //
-    public float speedbomb = 10f; //
+    public float speedbomb = 7f; //
     public bool kickBomb = false;
 
     int maxBombs = 10;
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         playerhurtsound = GameObject.Find("Capsule Mesh").GetComponent<PlayerCollisionBomb>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (isImmune)
         {

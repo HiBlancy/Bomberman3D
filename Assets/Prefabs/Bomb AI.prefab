@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 5952181120894435225, guid: 53a1f38a11d898e41b72ba9605d9049b,
         type: 3}
       propertyPath: m_Name
-      value: Bomb
+      value: Bomb AI
       objectReference: {fileID: 0}
     - target: {fileID: 5952181120894435229, guid: 53a1f38a11d898e41b72ba9605d9049b,
         type: 3}
