@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5952181120894435227}
   - component: {fileID: 5952181120894435224}
   - component: {fileID: -1210889351839962434}
-  - component: {fileID: 2387886260366236282}
+  - component: {fileID: 5826264056758472707}
   m_Layer: 8
   m_Name: Bomb
   m_TagString: Bomb
@@ -196,7 +196,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2387886260366236282
+--- !u!114 &5826264056758472707
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,11 +205,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5952181120894435225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9387b4c58ce747a44b1969598933b750, type: 3}
+  m_Script: {fileID: 11500000, guid: da9fa16bd0a5b9546aeb76c75a3792dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   explosion_power: 2
   capasObjetosDestructibles:
     serializedVersion: 2
-    m_Bits: 16832
-  audioClip: {fileID: -1210889351839962434}
+    m_Bits: 25024
+  audioClip: {fileID: 0}

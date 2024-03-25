@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,9 +24,8 @@ public class AIController : MonoBehaviour
     public bool canPuMoreBombs = true;
 
     //Random movement
-    public Vector3 walkPoint;
-    bool walkPointSet;
-    public float walkPointRange;
+    //public Vector3 walkPoint;
+    //public float walkPointRange;
 
     public float sightRange, attackRange, blockRange, powerupRange, bombRange;
     public bool playerInRange, playerInAttackRange, blockInRange, upgradeInRange, bombInRange;
@@ -48,7 +48,7 @@ public class AIController : MonoBehaviour
 
     public float fleeDistance = 10f;
 
-    public float blockStoppingDistance = 3f;
+    public float blockStoppingDistance = 0.5f;
     public float powerupStoppingDistance = 0.1f;
 
 
@@ -79,8 +79,11 @@ public class AIController : MonoBehaviour
                 break;
 
             case AIStates.Farm:
-                Debug.Log("Go to block"); //hay que hacer que vaya hasta alli
-                GoToBlock();
+                if (currentState != AIStates.Dodge)
+                {
+                    Debug.Log("Go to block"); //si
+                    GoToBlock();
+                }
                 break;
 
             case AIStates.Follow:
@@ -94,7 +97,7 @@ public class AIController : MonoBehaviour
                 break;
 
             case AIStates.Recolec:
-                Debug.Log("Taking powerup"); //hay que hacer que vaya hasta alli
+                Debug.Log("Taking powerup"); //si
                 RecollectPowerUp();
                 break;
 
@@ -111,8 +114,6 @@ public class AIController : MonoBehaviour
             if (immuneTime <= 0)
                 isImmune = false;
         }
-
-        if(bombInRange) currentState = AIStates.Dodge;
     }
 
     void RandomMovement()
@@ -122,17 +123,19 @@ public class AIController : MonoBehaviour
             Vector3 point;
             if (RandomPoint(centrePoint.position, range, out point)) //pass in our centre point and radius of area
             {
-                Debug.DrawRay(point, Vector3.up, Color.gray, 5f); //so you can see with gizmos
+                Debug.DrawRay(point, Vector3.up, Color.black, 50f); //so you can see with gizmos
                 agent.SetDestination(point);
+
+                Debug.LogWarning(point);         
             }
         }
 
-        if (blockInRange == true) currentState = AIStates.Farm;
-        if (blockInRange == true && bombInRange == true) currentState = AIStates.Dodge;
-        if (playerInRange == true) currentState = AIStates.Follow;
-        if (upgradeInRange == true) currentState = AIStates.Recolec;
-        if (playerInRange == true && bombInRange == true) currentState = AIStates.Dodge;
+        if (blockInRange) currentState = AIStates.Farm;
+        if (bombInRange) currentState = AIStates.Dodge;
+        //if (playerInRange) currentState = AIStates.Follow;
+        //if (upgradeInRange) currentState = AIStates.Recolec;
     }
+
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
         Vector3 randomPoint = center + Random.insideUnitSphere * range;
@@ -223,10 +226,8 @@ public class AIController : MonoBehaviour
 
         if (kickBomb)
             bomb.GetComponent<Rigidbody>().isKinematic = false;
-
-       // if (playerInRange == false) currentState = AIStates.Dodge;
-       // if (bombInRange == true) currentState= AIStates.Dodge;
     }
+
     public void BombsOnScreen()
     {
         bombsOnScreen++;
@@ -248,6 +249,7 @@ public class AIController : MonoBehaviour
         if(bombInRange)
         {
             RandomMovement();
+            
         }
         else
         {

@@ -15,6 +15,7 @@ public class PossiblityForUpgrade : MonoBehaviour
     {
         if (collision.CompareTag("Explotion"))
         {
+            NavMeshManager.Instance.BakeNavMesh();
             //Create small particle system of explotion?
 
             if (Random.Range(0.0f, 1.0f) > 0.5f)
@@ -25,6 +26,7 @@ public class PossiblityForUpgrade : MonoBehaviour
     }
     void OnEnable()
     {
+        NavMeshManager.Instance.BakeNavMesh();
         if (Random.Range(0.0f, 1.0f) > 0.5f)
             Instantiate(powerup_prefab, transform.position, Quaternion.identity);
 

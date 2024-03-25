@@ -13,7 +13,7 @@ public class ExplotionDuration : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Blocks")
+        if(collision.gameObject.CompareTag("Blocks"))
         collision.gameObject.GetComponent<PossiblityForUpgrade>().enabled = true;
     }
 
