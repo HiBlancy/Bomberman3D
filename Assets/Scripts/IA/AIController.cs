@@ -19,6 +19,9 @@ public class AIController : MonoBehaviour
     bool isImmune = false;
     float immuneTime = 2f;
 
+    bool bombDown = false;
+    float bombAgain = 0.5f;
+
     public AIStates currentState = AIStates.Idle;
 
     public int bombsOnScreen;
@@ -111,6 +114,13 @@ public class AIController : MonoBehaviour
                 isImmune = false;
         }
 
+        if(bombDown)
+        {
+            bombAgain -= Time.deltaTime;
+            if(bombAgain <= 0)
+                bombDown = false;
+        }
+
         if (bombInRange) currentState = AIStates.Dodge;
     }
 
@@ -200,11 +210,17 @@ public class AIController : MonoBehaviour
 
     void SetBomb()
     {
-        if (!IsCollosion() && canPuMoreBombs)
+        if (!IsCollosion() && canPuMoreBombs && !bombDown)
         {
-            PlantBomb(); //plantar solo una bomba ya qu epone todas de golpe
+            PlantBomb();
             BombsOnScreen();
+            waitTillNewBombTime();
         }
+    }
+
+    void waitTillNewBombTime()
+    {
+        bombDown = true;
     }
     bool IsCollosion()
     {
