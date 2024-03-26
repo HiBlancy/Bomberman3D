@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -23,10 +24,6 @@ public class AIController : MonoBehaviour
     public int bombsOnScreen;
     public bool canPuMoreBombs = true;
 
-    //Random movement
-    //public Vector3 walkPoint;
-    //public float walkPointRange;
-
     public float sightRange, attackRange, blockRange, powerupRange, bombRange;
     public bool playerInRange, playerInAttackRange, blockInRange, upgradeInRange, bombInRange;
 
@@ -37,25 +34,24 @@ public class AIController : MonoBehaviour
     public int explosion_power = 2;
     public bool kickBomb = false;
     public float speedbomb = 7f; 
-    public int bombs = 1;  
+    public int bombs = 1;
 
-    int maxBombs = 10;
+    readonly int maxBombs = 10;
 
     [SerializeField] LayerMask m_LayerMask;
 
     [SerializeField] Transform puntoDeReferencia;
     [SerializeField] float radioDeColision = 0.5f;
 
-    public float fleeDistance = 10f;
-
-    public float blockStoppingDistance = 0.5f;
+    public float blockStoppingDistance = 3f;
     public float powerupStoppingDistance = 0.1f;
 
+    public float dodgeDistance = 6f;
+    Vector3 bombPosition;
 
     public float range; //radius of sphere
 
     public Transform centrePoint;
-
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -83,7 +79,7 @@ public class AIController : MonoBehaviour
                 {
                     Debug.Log("Go to block"); //si
                     GoToBlock();
-                }
+                }               
                 break;
 
             case AIStates.Follow:
@@ -114,6 +110,8 @@ public class AIController : MonoBehaviour
             if (immuneTime <= 0)
                 isImmune = false;
         }
+
+        if (bombInRange) currentState = AIStates.Dodge;
     }
 
     void RandomMovement()
@@ -123,19 +121,17 @@ public class AIController : MonoBehaviour
             Vector3 point;
             if (RandomPoint(centrePoint.position, range, out point)) //pass in our centre point and radius of area
             {
-                Debug.DrawRay(point, Vector3.up, Color.black, 50f); //so you can see with gizmos
+                Debug.DrawRay(point, Vector3.up, UnityEngine.Color.gray, 5f); //so you can see with gizmos
                 agent.SetDestination(point);
-
-                Debug.LogWarning(point);         
             }
         }
 
-        if (blockInRange) currentState = AIStates.Farm;
-        if (bombInRange) currentState = AIStates.Dodge;
-        //if (playerInRange) currentState = AIStates.Follow;
-        //if (upgradeInRange) currentState = AIStates.Recolec;
+        if (blockInRange == true) currentState = AIStates.Farm;
+        if (blockInRange == true && bombInRange == true) currentState = AIStates.Dodge;
+        if (playerInRange == true) currentState = AIStates.Follow;
+        if (upgradeInRange == true) currentState = AIStates.Recolec;
+        if (playerInRange == true && bombInRange == true) currentState = AIStates.Dodge;
     }
-
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
         Vector3 randomPoint = center + Random.insideUnitSphere * range;
@@ -153,7 +149,7 @@ public class AIController : MonoBehaviour
     void GoToBlock()
     {
         if (currentState != AIStates.Dodge)
-        {
+        { 
             Collider[] blockColliders = Physics.OverlapSphere(transform.position, blockRange, block);
             Transform closestBlock = null;
             float closestDistance = float.MaxValue;
@@ -178,7 +174,10 @@ public class AIController : MonoBehaviour
                     SetBomb();
                 }
             }
-            _ = currentState != AIStates.Idle;
+        }
+        else
+        {
+            currentState = AIStates.Idle;
         }
     }
 
@@ -203,7 +202,7 @@ public class AIController : MonoBehaviour
     {
         if (!IsCollosion() && canPuMoreBombs)
         {
-            PlantBomb();
+            PlantBomb(); //plantar solo una bomba ya qu epone todas de golpe
             BombsOnScreen();
         }
     }
@@ -248,12 +247,31 @@ public class AIController : MonoBehaviour
     {    
         if(bombInRange)
         {
-            RandomMovement();
-            
+            UpdateBombPosition();
+            Vector3 dodgeDirection = (transform.position - bombPosition).normalized;
+            Vector3 dodgeDestination = transform.position + dodgeDirection * dodgeDistance;
+
+            // Establecer la posición de esquiva como destino y cambiar el estado a Dodge
+            agent.SetDestination(dodgeDestination);
         }
         else
         {
             currentState = AIStates.Idle;
+        }
+    }
+    void UpdateBombPosition()
+    {
+        Collider[] bombColliders = Physics.OverlapSphere(transform.position, blockRange, bomb);
+        float closestDistance = float.MaxValue;
+
+        foreach (Collider col in bombColliders)
+        {
+            float distance = Vector3.Distance(transform.position, col.transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                bombPosition = col.transform.position;
+            }
         }
     }
 
@@ -277,31 +295,40 @@ public class AIController : MonoBehaviour
 
             if (closestUpgrade != null)
             {
-                agent.stoppingDistance = powerupStoppingDistance;
-                agent.SetDestination(closestUpgrade.position);
+                // Usar A* para encontrar la ruta más corta hacia el power-up
+                NavMeshPath path = new NavMeshPath();
+                NavMesh.CalculatePath(transform.position, closestUpgrade.position, NavMesh.AllAreas, path);
 
-                if (Vector3.Distance(transform.position, closestUpgrade.position) < agent.stoppingDistance)
+                if (path.status == NavMeshPathStatus.PathComplete && path.corners.Length > 1)
                 {
-                    Debug.LogWarning("Upgrade Recolected");
-                    currentState = AIStates.Idle;
+                    // Configurar la ruta para el agente
+                    agent.stoppingDistance = powerupStoppingDistance;
+                    agent.SetPath(path);
+
+                    // Comprobar si el agente ha alcanzado el power-up
+                    if (agent.remainingDistance <= agent.stoppingDistance)
+                    {
+                        Debug.LogWarning("Upgrade Recolected");
+                        currentState = AIStates.Idle;
+                    }
                 }
             }
         }
-        if(!upgradeInRange)
+        if (!upgradeInRange)
         { currentState = AIStates.Idle; }
     }
 
         void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = UnityEngine.Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
-        Gizmos.color = Color.yellow;
+        Gizmos.color = UnityEngine.Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
-        Gizmos.color = Color.green;
+        Gizmos.color = UnityEngine.Color.green;
         Gizmos.DrawWireSphere(transform.position, blockRange);
-        Gizmos.color = Color.blue;
+        Gizmos.color = UnityEngine.Color.blue;
         Gizmos.DrawWireSphere(transform.position, powerupRange);
-        Gizmos.color = Color.white;
+        Gizmos.color = UnityEngine.Color.white;
         Gizmos.DrawWireSphere(transform.position, bombRange);
     }
 
