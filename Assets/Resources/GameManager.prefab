@@ -45,17 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c355a95114d8694c9269decf9a13df8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerspeed: {fileID: 7849392579631455439, guid: 228a4c636a6fd874c8678a7a443f7374,
+  playerspeed: {fileID: 1609881300704583307, guid: 3140e4508e656c74d846208c59c8b75d,
     type: 3}
-  bombpower: {fileID: 8931985276695957437, guid: e7e1c2085735b4f48bd9df4f62904d35,
+  bombpower: {fileID: 919132149155446097, guid: 2232aca313871924fbabe54ff270eac3,
     type: 3}
-  bombspeed: {fileID: 238718448011034863, guid: 8f40b8ecb4934304da8245b55fca417d,
+  bombspeed: {fileID: 919132149155446097, guid: 8ef87a1bb84ab8d4ebce409fbe585cd8,
     type: 3}
-  bombcount: {fileID: 8931985276695957437, guid: e04893aefacc82f4e93864103833fa72,
+  bombcount: {fileID: 919132149155446097, guid: e655fed714802b14abc6723e17d7bbc5,
     type: 3}
-  playerhealth: {fileID: 8931985276695957437, guid: f420973239d386f4d840ee2227b5e220,
+  playerhealth: {fileID: 919132149155446097, guid: 7fe7a66efa99015488e0a47f2d9c8519,
     type: 3}
-  kickbomb: {fileID: 2749620822983120214, guid: 7c9dfc47d74044e4d9ff3996b536e953,
+  kickbomb: {fileID: 3637607021245696170, guid: 805f20e97c0ea784f83c74513223af1e,
     type: 3}
   powerup: 0
 --- !u!135 &2216489968729315672
