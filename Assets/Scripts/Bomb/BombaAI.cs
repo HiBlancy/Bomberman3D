@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BombaAI : MonoBehaviour
@@ -27,7 +28,7 @@ public class BombaAI : MonoBehaviour
 
     void Explotar()
     {
-        //audioClip.Play();
+        audioClip.Play();
         gameObject.GetComponent<MeshRenderer>().enabled = false;
 
         Invoke("DestroySelf", 0.6f);

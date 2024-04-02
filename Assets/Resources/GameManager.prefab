@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 6040215558626575210}
   - component: {fileID: 6040215558626575211}
   - component: {fileID: 2216489968729315672}
-  m_Layer: 0
+  - component: {fileID: 5301859048572871318}
+  m_Layer: 12
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,13 +48,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerspeed: {fileID: 1609881300704583307, guid: 3140e4508e656c74d846208c59c8b75d,
     type: 3}
-  bombpower: {fileID: 919132149155446097, guid: 2232aca313871924fbabe54ff270eac3,
+  bombpower: {fileID: 7891506852895330963, guid: 61f0bd14f5d1b4748ae76c47d1a3e641,
     type: 3}
-  bombspeed: {fileID: 919132149155446097, guid: 8ef87a1bb84ab8d4ebce409fbe585cd8,
+  bombspeed: {fileID: 2563374091301339037, guid: ceefd18b77c1f144c96439b0df49dbfe,
     type: 3}
-  bombcount: {fileID: 919132149155446097, guid: e655fed714802b14abc6723e17d7bbc5,
+  bombcount: {fileID: 8748727839918266149, guid: 01d7482c915386b458a157429fa7aa55,
     type: 3}
-  playerhealth: {fileID: 919132149155446097, guid: 7fe7a66efa99015488e0a47f2d9c8519,
+  playerhealth: {fileID: 1046963809903747701, guid: 7ee1ef3f8f121cd439559b8e18257c1a,
     type: 3}
   kickbomb: {fileID: 3637607021245696170, guid: 805f20e97c0ea784f83c74513223af1e,
     type: 3}
@@ -71,3 +72,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5301859048572871318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6040215558626575221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb9450d83616ad41a4bcc6264b8b8b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  valorX: 0
+  valorY: 10
+  valorZ: 0

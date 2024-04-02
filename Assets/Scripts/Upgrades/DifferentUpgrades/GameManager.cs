@@ -60,29 +60,23 @@ public class GameManager : MonoBehaviour
             switch (powerup)
             {
                 case POWERUPS.PlayerSpeed:
-                    Debug.Log("PlayerSpeed");
                     player.moveSpeed = player.moveSpeed + 0.5f;
                     break;
                 case POWERUPS.BombPower:
-                    Debug.Log("BombPower");
                     player.explosion_power++;
                     break;
                 case POWERUPS.BombSpeed:
-                    Debug.Log("BombSpeed");
                     player.speedbomb--;
                     break;
                 case POWERUPS.BombCount:
-                    Debug.Log("BombCount");
                     player.bombs++;
                     player.CheckOnBombs();
                     break;
                 case POWERUPS.PlayerHealth:
-                    Debug.Log("PlayerHealth");
                     player.lifes++;
                     player.CheckOnLifes();
                     break;
                 case POWERUPS.KickBomb:
-                    Debug.Log("Can KickBomb");
                     player.kickBomb = true;
                     break;
             }
@@ -97,29 +91,23 @@ public class GameManager : MonoBehaviour
             switch (powerup)
             {
                 case POWERUPS.PlayerSpeed:
-                    Debug.Log("AISpeed");
                     Ai.AIspeed = Ai.AIspeed + 0.5f;
                     break;
                 case POWERUPS.BombPower:
-                    Debug.Log("AIBombPower");
                     Ai.explosion_power++;
                     break;
                 case POWERUPS.BombSpeed:
-                    Debug.Log("AIBombSpeed");
                     Ai.speedbomb--;
                     break;
                 case POWERUPS.BombCount:
-                    Debug.Log("AIBombCount");
                     Ai.bombs++;
                     Ai.CheckOnBombs();
                     break;
                 case POWERUPS.PlayerHealth:
-                    Debug.Log("AIHealth");
                     Ai.lifes++;
                     Ai.CheckOnLifes();
                     break;
                 case POWERUPS.KickBomb:
-                    Debug.Log("AI Can KickBomb");
                     Ai.kickBomb = true;
                     break;
             }

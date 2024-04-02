@@ -47,7 +47,7 @@ public class AIController : MonoBehaviour
     [SerializeField] float radioDeColision = 0.5f;
 
     public float blockStoppingDistance = 3f;
-    public float powerupStoppingDistance = 0.1f;
+    public float powerupStoppingDistance = 0.01f;
 
     public float dodgeDistance = 6f;
     Vector3 bombPosition;
@@ -55,11 +55,14 @@ public class AIController : MonoBehaviour
     public float range; //radius of sphere
 
     public Transform centrePoint;
+
+
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
 
         player = GameObject.Find("First Person Controller").transform;
+
     }
 
     void FixedUpdate()
@@ -120,8 +123,8 @@ public class AIController : MonoBehaviour
             if(bombAgain <= 0)
                 bombDown = false;
         }
-
         if (bombInRange) currentState = AIStates.Dodge;
+        if (upgradeInRange) currentState = AIStates.Recolec;
     }
 
     void RandomMovement()
@@ -136,11 +139,11 @@ public class AIController : MonoBehaviour
             }
         }
 
-        if (blockInRange == true) currentState = AIStates.Farm;
-        if (blockInRange == true && bombInRange == true) currentState = AIStates.Dodge;
-        if (playerInRange == true) currentState = AIStates.Follow;
-        if (upgradeInRange == true) currentState = AIStates.Recolec;
-        if (playerInRange == true && bombInRange == true) currentState = AIStates.Dodge;
+        if (blockInRange && bombInRange) currentState = AIStates.Dodge;
+        if (playerInRange) currentState = AIStates.Follow;
+        if (upgradeInRange) currentState = AIStates.Recolec;
+        if (playerInRange && bombInRange) currentState = AIStates.Dodge;
+        if (blockInRange) currentState = AIStates.Farm;
     }
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
@@ -158,6 +161,7 @@ public class AIController : MonoBehaviour
 
     void GoToBlock()
     {
+        if (bombInRange) currentState = AIStates.Dodge;
         if (currentState != AIStates.Dodge)
         { 
             Collider[] blockColliders = Physics.OverlapSphere(transform.position, blockRange, block);
@@ -195,8 +199,8 @@ public class AIController : MonoBehaviour
     {
         agent.SetDestination(player.position);
 
-        if (playerInAttackRange == true) currentState = AIStates.Attack;
-        if(playerInRange == false) currentState = AIStates.Idle;
+        if (playerInAttackRange) currentState = AIStates.Attack;
+        if (!playerInRange) currentState = AIStates.Idle;
     }
 
     void AttackingPlayer()
@@ -311,20 +315,16 @@ public class AIController : MonoBehaviour
 
             if (closestUpgrade != null)
             {
-                // Usar A* para encontrar la ruta más corta hacia el power-up
                 NavMeshPath path = new NavMeshPath();
                 NavMesh.CalculatePath(transform.position, closestUpgrade.position, NavMesh.AllAreas, path);
 
                 if (path.status == NavMeshPathStatus.PathComplete && path.corners.Length > 1)
                 {
-                    // Configurar la ruta para el agente
                     agent.stoppingDistance = powerupStoppingDistance;
                     agent.SetPath(path);
 
-                    // Comprobar si el agente ha alcanzado el power-up
                     if (agent.remainingDistance <= agent.stoppingDistance)
                     {
-                        Debug.LogWarning("Upgrade Recolected");
                         currentState = AIStates.Idle;
                     }
                 }
@@ -334,7 +334,7 @@ public class AIController : MonoBehaviour
         { currentState = AIStates.Idle; }
     }
 
-        void OnDrawGizmosSelected()
+    void OnDrawGizmosSelected()
     {
         Gizmos.color = UnityEngine.Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
