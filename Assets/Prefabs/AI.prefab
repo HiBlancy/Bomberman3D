@@ -2918,6 +2918,7 @@ MonoBehaviour:
   radioDeColision: 0.5
   blockStoppingDistance: 3
   powerupStoppingDistance: 0.01
+  randomStoppingDistance: 0.1
   dodgeDistance: 6
   range: 15
   centrePoint: {fileID: 8017148777663486365}
