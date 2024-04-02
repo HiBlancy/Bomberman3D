@@ -10554,6 +10554,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 754073013, guid: 62cca3099ffb9254b88767bed37b2ee0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8017148777663486337, guid: 62cca3099ffb9254b88767bed37b2ee0,
         type: 3}
       propertyPath: gameOverPanel
@@ -10563,6 +10567,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8017148777663486343, guid: 62cca3099ffb9254b88767bed37b2ee0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8017148777663486364, guid: 62cca3099ffb9254b88767bed37b2ee0,
         type: 3}

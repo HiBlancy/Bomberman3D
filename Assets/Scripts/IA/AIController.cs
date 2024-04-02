@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using Unity.VisualScripting;
@@ -20,7 +20,7 @@ public class AIController : MonoBehaviour
     float immuneTime = 2f;
 
     bool bombDown = false;
-    float bombAgain = 0.5f;
+    float bombAgain = 1f;
 
     public AIStates currentState = AIStates.Idle;
 
@@ -36,7 +36,7 @@ public class AIController : MonoBehaviour
     public int lifes = 3;
     public int explosion_power = 2;
     public bool kickBomb = false;
-    public float speedbomb = 7f; 
+    public float speedbomb = 7f;
     public int bombs = 1;
 
     readonly int maxBombs = 10;
@@ -47,7 +47,7 @@ public class AIController : MonoBehaviour
     [SerializeField] float radioDeColision = 0.5f;
 
     public float blockStoppingDistance = 3f;
-    public float powerupStoppingDistance = 0.01f;
+    public float powerupStoppingDistance = 0.1f;
 
     public float dodgeDistance = 6f;
     Vector3 bombPosition;
@@ -55,14 +55,11 @@ public class AIController : MonoBehaviour
     public float range; //radius of sphere
 
     public Transform centrePoint;
-
-
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
 
         player = GameObject.Find("First Person Controller").transform;
-
     }
 
     void FixedUpdate()
@@ -85,7 +82,7 @@ public class AIController : MonoBehaviour
                 {
                     Debug.Log("Go to block"); //si
                     GoToBlock();
-                }               
+                }
                 break;
 
             case AIStates.Follow:
@@ -106,7 +103,7 @@ public class AIController : MonoBehaviour
             case AIStates.Attack:
                 Debug.Log("Attacking!"); //si
                 AttackingPlayer();
-                break;   
+                break;
         }
 
         if (isImmune)
@@ -117,14 +114,14 @@ public class AIController : MonoBehaviour
                 isImmune = false;
         }
 
-        if(bombDown)
+        if (bombDown)
         {
             bombAgain -= Time.deltaTime;
-            if(bombAgain <= 0)
+            if (bombAgain <= 0)
                 bombDown = false;
         }
+
         if (bombInRange) currentState = AIStates.Dodge;
-        if (upgradeInRange) currentState = AIStates.Recolec;
     }
 
     void RandomMovement()
@@ -139,11 +136,11 @@ public class AIController : MonoBehaviour
             }
         }
 
-        if (blockInRange && bombInRange) currentState = AIStates.Dodge;
-        if (playerInRange) currentState = AIStates.Follow;
-        if (upgradeInRange) currentState = AIStates.Recolec;
-        if (playerInRange && bombInRange) currentState = AIStates.Dodge;
-        if (blockInRange) currentState = AIStates.Farm;
+        if (blockInRange == true) currentState = AIStates.Farm;
+        if (blockInRange == true && bombInRange == true) currentState = AIStates.Dodge;
+        if (playerInRange == true) currentState = AIStates.Follow;
+        if (upgradeInRange == true) currentState = AIStates.Recolec;
+        if (playerInRange == true && bombInRange == true) currentState = AIStates.Dodge;
     }
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
@@ -161,9 +158,8 @@ public class AIController : MonoBehaviour
 
     void GoToBlock()
     {
-        if (bombInRange) currentState = AIStates.Dodge;
         if (currentState != AIStates.Dodge)
-        { 
+        {
             Collider[] blockColliders = Physics.OverlapSphere(transform.position, blockRange, block);
             Transform closestBlock = null;
             float closestDistance = float.MaxValue;
@@ -199,8 +195,8 @@ public class AIController : MonoBehaviour
     {
         agent.SetDestination(player.position);
 
-        if (playerInAttackRange) currentState = AIStates.Attack;
-        if (!playerInRange) currentState = AIStates.Idle;
+        if (playerInAttackRange == true) currentState = AIStates.Attack;
+        if (playerInRange == false) currentState = AIStates.Idle;
     }
 
     void AttackingPlayer()
@@ -264,14 +260,14 @@ public class AIController : MonoBehaviour
     }
 
     private void DodgeBomb()
-    {    
-        if(bombInRange)
+    {
+        if (bombInRange)
         {
             UpdateBombPosition();
             Vector3 dodgeDirection = (transform.position - bombPosition).normalized;
             Vector3 dodgeDestination = transform.position + dodgeDirection * dodgeDistance;
 
-            // Establecer la posición de esquiva como destino y cambiar el estado a Dodge
+            // Establecer la posicion de esquiva como destino y cambiar el estado a Dodge
             agent.SetDestination(dodgeDestination);
         }
         else
@@ -315,16 +311,20 @@ public class AIController : MonoBehaviour
 
             if (closestUpgrade != null)
             {
+                // Usar A* para encontrar la ruta mï¿½s corta hacia el power-up
                 NavMeshPath path = new NavMeshPath();
                 NavMesh.CalculatePath(transform.position, closestUpgrade.position, NavMesh.AllAreas, path);
 
                 if (path.status == NavMeshPathStatus.PathComplete && path.corners.Length > 1)
                 {
+                    // Configurar la ruta para el agente
                     agent.stoppingDistance = powerupStoppingDistance;
                     agent.SetPath(path);
 
+                    // Comprobar si el agente ha alcanzado el power-up
                     if (agent.remainingDistance <= agent.stoppingDistance)
                     {
+                        Debug.LogWarning("Upgrade Recolected");
                         currentState = AIStates.Idle;
                     }
                 }
