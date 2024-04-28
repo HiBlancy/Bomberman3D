@@ -25,8 +25,8 @@ public class AIController : MonoBehaviour
     [SerializeField] int bombsOnScreen;
     [SerializeField] bool canPuMoreBombs = true;
 
-    public float sightRange, attackRange, blockRange, powerupRange, bombRange;
-    public bool playerInRange, playerInAttackRange, blockInRange, upgradeInRange, bombInRange;
+    [SerializeField] float sightRange, attackRange, blockRange, powerupRange, bombRange;
+    [SerializeField] bool playerInRange, playerInAttackRange, blockInRange, upgradeInRange, bombInRange;
 
     public LayerMask whatIsGround, whatIsPlayer, block, powerup, bomb;
 
@@ -51,7 +51,7 @@ public class AIController : MonoBehaviour
     float dodgeDistance = 6f;
     Vector3 bombPosition;
 
-    public float range; //radius of sphere
+    public float range = 20; //radius of sphere
 
     public Transform centrePoint;
     Animator anim;
@@ -118,6 +118,9 @@ public class AIController : MonoBehaviour
         }
 
         if (bombInRange) currentState = AIStates.Dodge;
+
+        bool isWalking = agent.velocity.magnitude > 0.1f;
+        anim.SetBool("isWalking", isWalking);
     }
 
     void RandomMovement()
@@ -132,8 +135,6 @@ public class AIController : MonoBehaviour
                 agent.SetDestination(point);
             }
         }
-
-        anim.SetBool("isWalking", true);
 
         if (blockInRange) currentState = AIStates.Farm;
         if (blockInRange && bombInRange) currentState = AIStates.Dodge;
@@ -180,7 +181,6 @@ public class AIController : MonoBehaviour
 
                 if (Vector3.Distance(transform.position, closestBlock.position) < agent.stoppingDistance)
                 {
-                    anim.SetBool("isWalking", true);
                     SetBomb();
                 }
             }
@@ -188,13 +188,11 @@ public class AIController : MonoBehaviour
         else
         {
             currentState = AIStates.Idle;
-            anim.SetBool("isWalking", false);
         }
     }
 
     void FollowingPlayer()
     {
-        anim.SetBool("isWalking", true);
         agent.SetDestination(player.position);
 
         if (playerInAttackRange) currentState = AIStates.Attack;
@@ -204,7 +202,6 @@ public class AIController : MonoBehaviour
     void AttackingPlayer()
     {
         agent.SetDestination(player.position);
-        anim.SetBool("isWalking", true);
         if (!playerInAttackRange && playerInRange) currentState = AIStates.Follow;
 
         SetBomb();
@@ -271,15 +268,10 @@ public class AIController : MonoBehaviour
             Vector3 dodgeDirection = (transform.position - bombPosition).normalized;
             Vector3 dodgeDestination = transform.position + dodgeDirection * dodgeDistance;
 
-            // Establecer la posicion de esquiva como destino y cambiar el estado a Dodge
             agent.SetDestination(dodgeDestination);
-            anim.SetBool("isWalking", false);
         }
         else
-        {
             currentState = AIStates.Idle;
-            anim.SetBool("isWalking", true);
-        }
     }
     void UpdateBombPosition()
     {
@@ -324,23 +316,17 @@ public class AIController : MonoBehaviour
                 {
                     agent.stoppingDistance = powerupStoppingDistance;
                     agent.SetPath(path);
-                    anim.SetBool("isWalking", true);
 
                     if (agent.remainingDistance <= agent.stoppingDistance)
-                    {
                         currentState = AIStates.Idle;
-                    }
                 }
             }
         }
         if (!upgradeInRange)
-        { currentState = AIStates.Idle;
-            anim.SetBool("isWalking", false);
-        }
-        
+        currentState = AIStates.Idle;   
     }
 
-    void OnDrawGizmosSelected()
+    void OnDrawGizmosSelected() //Esferas de deteccion del NPC
     {
         Gizmos.color = UnityEngine.Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);

@@ -51,7 +51,6 @@ public class Bomba : MonoBehaviour
             Vector3 raycastPosition = transform.position + direccion * i;
 
             Physics.Raycast(transform.position, direccion, out hit, i);
-            Debug.DrawLine(transform.position, raycastPosition, Color.green, 3f);
 
             if (!hit.collider)
             {

@@ -10556,6 +10556,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8017148777663486337, guid: 62cca3099ffb9254b88767bed37b2ee0,
         type: 3}
+      propertyPath: range
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8017148777663486337, guid: 62cca3099ffb9254b88767bed37b2ee0,
+        type: 3}
       propertyPath: gameOverPanel
       value: 
       objectReference: {fileID: 263071834057703323}
@@ -28377,6 +28382,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1968322221}
     m_Modifications:
+    - target: {fileID: 1830076024519552572, guid: 18634c3883a809544aceb6e2d77312a2,
+        type: 3}
+      propertyPath: m_text
+      value: PLAY AGAIN
+      objectReference: {fileID: 0}
     - target: {fileID: 8077758633214961426, guid: 18634c3883a809544aceb6e2d77312a2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
